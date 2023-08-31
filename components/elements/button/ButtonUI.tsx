@@ -1,5 +1,5 @@
 import React from 'react'
-// import './style.scss'
+import btnStyles from './_style.module.scss'
 
 interface myProps{
   text?:string,
@@ -10,8 +10,8 @@ interface myProps{
 
 export default function ButtonUI(props:myProps) {
   return (
-    <div id='ButtonUi' className={`${props.fullWidth&&"fullWidth"}`}>
-      <button onClick={()=>props.onButtonClicked!=undefined?props.onButtonClicked():""} className={`btnBaseStyle ${!!props.type?props.type:"Primary"}`}>{props.text}</button>
+    <div id={btnStyles.ButtonUi} className={`${props.fullWidth&&btnStyles.fullWidtdh}`}>
+      <button onClick={()=>props.onButtonClicked!=undefined?props.onButtonClicked():""} className={`${btnStyles.btnBaseStyle} ${!!props.type?btnStyles[props.type]:btnStyles.Primary}`}>{props.text}</button>
     </div>
   )
 }
