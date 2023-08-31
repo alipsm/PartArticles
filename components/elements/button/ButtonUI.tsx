@@ -10,8 +10,8 @@ interface myProps{
 
 export default function ButtonUI(props:myProps) {
   return (
-    <div id='ButtonUi'>
-      <button onClick={()=>props.onButtonClicked!=undefined?props.onButtonClicked():""} className={`btnBaseStyle ${props.type} ${props.fullWidth&&"fullWidth"}`}>{props.text}</button>
+    <div id='ButtonUi' className={`${props.fullWidth&&"fullWidth"}`}>
+      <button onClick={()=>props.onButtonClicked!=undefined?props.onButtonClicked():""} className={`btnBaseStyle ${!!props.type?props.type:"Primary"}`}>{props.text}</button>
     </div>
   )
 }

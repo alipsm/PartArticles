@@ -1,0 +1,60 @@
+// TODO: For better use of this component, use ROBOTO font
+
+
+// colors palette
+$Gray:#eeeeee;
+$Error:#d81515;
+$Black:#000000de;
+
+
+// font size
+$largeFontSize:24px;
+$titleFontSize:20px;
+$errorFontSize:16px;
+
+#InputUi{
+    color: $Black;
+    position: relative;
+
+    &.fullWidth{
+        width: 100%;
+    }
+    input{
+        outline: none;
+        border: none;
+        padding: 15px 25px;
+        border-radius: 12px;
+        background-color: $Gray;
+        font-size: $largeFontSize;
+        transition: all linear 300ms;
+        width: 100%;
+        box-sizing: border-box;
+        &:focus{
+            background-color: darken($color:$Gray, $amount: 5);
+        }
+    }
+    .title{
+        position: absolute;
+        font-size: $titleFontSize;
+        left: 12px;
+        top: -$titleFontSize + (-12);
+        .require{
+            position: absolute;
+            right: -12px;
+            top: -5px;
+            color: $Error;
+            margin-left: 5px;
+        }
+        &.error{
+            color: $Error;
+        }
+    }
+
+    .errorText{
+        position: absolute;
+        left: 12px;
+        bottom:-$errorFontSize + (-8);
+        font-size: $errorFontSize;
+        color: $Error;
+    }
+}

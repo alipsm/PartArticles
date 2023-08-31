@@ -11,19 +11,21 @@ $largeFontSize:25px;
 
 
 #ButtonUi{
+
+    &.fullWidth{
+        width: 100%;
+    }
+
     .btnBaseStyle{
         height: 74px;
         padding: 0px 20px;
         font-size: $largeFontSize;
-        width: auto;
+        width: 100%;
         border-radius: 12px;
         cursor: pointer;
         transition: all linear 300ms;
     }
-    .btnBaseStyle.fullWidth{
-        width: 100%;
-    }
-    
+
     .btnBaseStyle.Primary{
         background-color: $cerulean_clue;
         color: white;
