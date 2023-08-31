@@ -1,0 +1,14 @@
+@import url(./font.css);
+
+*{
+    margin: 0px;
+    padding: 0px;
+    /* font-family: Roboto; */
+
+}
+
+.parent{
+    width: 100vw;
+    height: 100vh;
+    /* background-color: rgb(136, 136, 136); */
+}

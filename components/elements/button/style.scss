@@ -1,0 +1,54 @@
+// TODO: For better use of this component, use ROBOTO font
+
+
+// colors palette
+$cerulean_clue:#3f51b5;
+$Secondary:#fff;
+$Tertiary:#d2d5e5;
+
+// font size
+$largeFontSize:25px;
+
+
+#ButtonUi{
+    .btnBaseStyle{
+        height: 74px;
+        padding: 0px 20px;
+        font-size: $largeFontSize;
+        width: auto;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all linear 300ms;
+    }
+    .btnBaseStyle.fullWidth{
+        width: 100%;
+    }
+    
+    .btnBaseStyle.Primary{
+        background-color: $cerulean_clue;
+        color: white;
+        border: none;
+        &:hover{
+           background-color: lighten($color: $cerulean_clue, $amount: 5);
+        }
+    }
+
+    .btnBaseStyle.Secondary{
+        background-color: $Secondary;
+        color: $cerulean_clue;
+        border: solid 1px $cerulean_clue;
+        &:hover{
+           background-color:lighten($color: $cerulean_clue, $amount: 50)
+        }
+    }
+
+    .btnBaseStyle.Tertiary{
+        background-color: $Tertiary;
+        color: $cerulean_clue;
+        border: none;
+        &:hover{
+           background-color:darken($color: $Tertiary, $amount: 5)
+        }
+    }
+
+}
