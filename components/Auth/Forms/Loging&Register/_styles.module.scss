@@ -1,0 +1,50 @@
+
+$border_color:#b0b0b0;
+$description_color:#00000099;
+
+$card_padding:48px;
+
+$title_font_size:36px;
+
+#HeaderCards{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 84px;
+    p{
+        margin-top: 24px;
+        font-size: $title_font_size;
+    }
+    span{
+        margin-top: 13px;
+        font-size: 20px;
+        color: $description_color;
+    }
+}
+
+
+#RegisterForm,#LoginForm{
+    box-sizing: border-box;
+    border: 1px solid $border_color;
+    border-radius: 24px;
+    padding: $card_padding;
+
+    // org max-with is 580px
+    max-width: 500px;
+    
+    width: 100%;
+    // min-height: 1050px;
+    #InputUi{
+    }
+    .textInput{
+        margin-bottom: 60px;
+    }
+    .recaptcha{
+        display: flex;
+        justify-content: center;
+        margin: auto;
+        max-width: 200px;
+    }
+}
