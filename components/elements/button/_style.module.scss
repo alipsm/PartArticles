@@ -5,6 +5,8 @@
 $cerulean_clue:#3f51b5;
 $Secondary:#fff;
 $Tertiary:#d2d5e5;
+$Disable:#00000066;
+$bg_disable:#d5d5d5;
 
 // font size
 $largeFontSize:25px;
@@ -24,6 +26,25 @@ $largeFontSize:25px;
         border-radius: 12px;
         cursor: pointer;
         transition: all linear 300ms;
+        &:has(img){
+            // background-color: red !important;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            img{
+                margin-right: 16px;
+
+                filter: brightness(0) invert(1);
+            }
+        }
+        &.disable{
+            cursor: default;
+            background-color: $bg_disable !important;
+            color: $Disable !important;
+            img{
+                filter: brightness(0) invert(.5);
+            }
+        }
     }
 
     .btnBaseStyle.Primary{
