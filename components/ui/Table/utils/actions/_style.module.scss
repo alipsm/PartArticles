@@ -1,0 +1,35 @@
+
+
+$bg_edit:#d1d5ed;
+$bg_delete:#f6c7c7;
+
+
+#Actions{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .edit,.delete{
+        width: 44px;
+        height: 44px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        margin: 3px;
+        cursor: pointer;
+    }
+
+    .edit{
+        background-color: $bg_edit;
+        &:hover{
+            background-color: darken($color: $bg_edit, $amount: 5);
+        }
+    }
+    .delete{
+        background-color: $bg_delete;
+        &:hover{
+            background-color: darken($color: $bg_delete, $amount: 5);
+        }
+    }
+}

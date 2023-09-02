@@ -7,9 +7,11 @@
     width: 100%;
     height: 100vh;
     display: flex;
-    flex-wrap: wrap;
     #SidebarMenu{
         flex: 380px;
-
+    }
+    .mainContent{
+        width: 100%;
+        padding: 0px 2.5vw;
     }
 }

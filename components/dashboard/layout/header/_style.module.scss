@@ -1,0 +1,14 @@
+
+$fontSize:48px;
+
+#Header{
+    width: 100%;
+    padding: 40px 0px;
+    font-size: $fontSize;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    b{
+        font-size: 1em;
+    }
+}
