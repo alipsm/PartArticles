@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { tableInterface } from "./types/tableInterface";
 import Actions from "./utils/actions/Actions";
+import Pagination from "./utils/pagination/Pagination";
 import styles from "./_style.module.scss";
 
 const { getColumnsNumber } = require("./utils/CalculateColumns.tsx");
@@ -8,12 +9,20 @@ const { applyStyleToValue } = require("./utils/applyStyleToValue.tsx");
 const { checkPathsLenght } = require("./types/tableInterface.ts");
 
 export default function Table(props: tableInterface) {
+
   if (!checkPathsLenght(props)) {
     console.warn(
       "عنوان ها با مسیر ها باید طول یکسانی داشته باشند \n لطفا به طول مقادیر دقت کنید"
-    );
-    return;
-  }
+      );
+      return ;
+    }
+  
+    const [tableData, setTableData] = useState(props.data)
+    useEffect(() => {
+      setTableData(props.data)
+    }, [props.data.length])
+    
+
   const getColumnCount = getColumnsNumber(props);
   const getStyleForRow = (index: number): string => {
     if (index == 0 && !props.showIndex) {
@@ -25,6 +34,8 @@ export default function Table(props: tableInterface) {
   };
 
   return (
+    <>
+
     <div
       id={styles.Table}
       style={{
@@ -50,7 +61,7 @@ export default function Table(props: tableInterface) {
       )}
 
       {/*row cells */}
-      {props.data.map((item, rowIndex) => (
+      {tableData.map((item, rowIndex) => (
         <>
           {/* Index (optional) */}
           {props.showIndex && (
@@ -95,6 +106,10 @@ export default function Table(props: tableInterface) {
           )}
         </>
       ))}
+
     </div>
+      <Pagination {...props}/>
+    </>
+
   );
 }

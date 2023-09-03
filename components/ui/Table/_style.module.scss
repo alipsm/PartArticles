@@ -13,10 +13,12 @@ $font_size:24px;
 
 #Table{
     display: grid;
-    // grid-template-columns: repeat(5,minmax(100px,auto));
     row-gap: 15px;
     font-size: $font_size;
     min-width: 600px;
+    max-height: 70vh;
+    // min-height: 70vh;
+    overflow-y: scroll;
 
     .table_header{
         background-color: $bg_header_row;

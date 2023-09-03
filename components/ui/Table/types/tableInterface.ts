@@ -3,7 +3,7 @@
     data: object[];
     paths:string[]
     showIndex?: boolean;
-    showAction?: { onEdit: Function; onDelete: Function };
+    showAction?: { onEdit: Function; onDelete: Function;};
     setTagStyleForColumn?: number | number[];
     rowCount?: number;
     pagination?: boolean;

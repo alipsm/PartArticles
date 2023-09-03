@@ -37,10 +37,10 @@ export default function LoginForm({
           error={setInputError}
           require
         />
-        <ButtonUI text="Login" />
+        <ButtonUI text="Login" fullWidth/>
         <br />
         <Link href={"register"}>
-          <ButtonUI text="Register" type="Secondary" />
+          <ButtonUI text="Register" type="Secondary" fullWidth/>
         </Link>
       </form>
     </div>

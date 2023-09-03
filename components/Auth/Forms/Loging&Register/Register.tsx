@@ -56,10 +56,10 @@ export default function RegisterForm({
           ref={capRef}
         />
         <br />
-        <ButtonUI text="Sign Up" />
+        <ButtonUI text="Sign Up" fullWidth/>
         <br />
         <Link href={"login"}>
-          <ButtonUI text="Login" type="Secondary" />
+          <ButtonUI text="Login" type="Secondary" fullWidth/>
         </Link>
       </form>
     </div>

@@ -26,10 +26,8 @@ export default function useArticleCRUD() {
     }
   }
   async function readMyArticle() {
-    const { getValidation } = useFormValidation();
 
     try {
-      // if (!getValidation(formDataObject)) throw new Error("Empity value!");
       const token= localStorage.getItem("token");
       if (!!!token) throw new Error("Token is Empity!")
       const { data, status } = await axios
@@ -51,5 +49,33 @@ export default function useArticleCRUD() {
     }
   }
 
-  return { createArticle ,readMyArticle};
+  async function deleteArticle(articleId:string) {
+    const { getValidation } = useFormValidation();
+
+    try {
+      console.log('articleId', articleId)
+      const token= localStorage.getItem("token");
+      if (!!!token) throw new Error("Token is Empity!")
+      const { data, status } = await axios
+        .delete(`/api/handlers/article/delete`, {
+          headers: {
+            "Content-Type": "application/json",
+            token: token || "",
+            "article-id":articleId || ""
+          },
+        })
+        .catch((e) => {
+          throw new Error(e.response.data.message);
+        });
+      if (status == 200) {
+        return data;
+      }
+      throw new Error("Please try again status code:" + status);
+    } catch (error: any) {
+      throw Error(error.message);
+    }
+  }
+
+
+  return { createArticle ,readMyArticle,deleteArticle};
 }

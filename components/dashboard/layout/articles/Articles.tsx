@@ -12,15 +12,24 @@ const { Header } = require("../header/Header.tsx");
 const apiData = require("../../../ui/Table/utils/ApiData.json");
 export default function Articles() {
 
+  const {deleteArticle} = useArticleCRUD()
   const [tableData, setTableData] = useState([])
 
   const {readMyArticle} = useArticleCRUD()
   const {showToast} = useToast()
+
   function onEditFun(e) {
     console.log("edit function :>> ", e);
   }
-  function onDeleteFun(e) {
-    console.log("delete function :>> ", e);
+
+  async function onDeleteFun(e) {
+      try {
+        const data= await deleteArticle(e.uuid);
+        setTableData(data);
+        showToast({ text: "Article deleted successfully", type: "Success" });
+      } catch (error) {
+        showToast({ text: error.message||error, type: "Error" });
+      }
   }
 
   useEffect(() => {
@@ -47,7 +56,7 @@ export default function Articles() {
         data={tableData}
         titles={["Title", "Author", "Tags", "Excerpt", "Created At"]}
         paths={["title","username","tags","body","articleId"]}
-        showAction={{ onDelete: onDeleteFun, onEdit: onEditFun }}
+        showAction={{ onDelete: onDeleteFun, onEdit: onEditFun}}
         setTagStyleForColumn={3}
         showIndex
       />
