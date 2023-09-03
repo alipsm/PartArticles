@@ -20,12 +20,14 @@ export default function SidebarMenu() {
               text="All Articles"
               fontSize={22}
               image={{ src: BoxPicture, alt: "box" }}
+              fullWidth
             />
           </Link>
           <ButtonUI
             text="Favorites"
             fontSize={22}
             image={{ src: FavoritesPicture, alt: "favorites" }}
+            fullWidth
             disable
           />
         </main>
@@ -33,7 +35,7 @@ export default function SidebarMenu() {
       <div>
         <main>
           <Banner />
-          <ButtonUI text="Log Out" fontSize={22} type="Tertiary" />
+          <ButtonUI text="Log Out" fontSize={22} type="Tertiary" fullWidth/>
         </main>
       </div>
     </div>

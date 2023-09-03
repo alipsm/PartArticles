@@ -4,6 +4,14 @@ import GetMainDashboard from "../../components/dashboard/GetMainDashboard";
 import SidebarMenu from "../../components/dashboard/SideBarMenu/SidebarMenu";
 
 export default function MainDashboard() {
+
+  useEffect(() => {
+    const token=localStorage.getItem('token')
+    if (!!!token) {
+      Router.replace("/accountOperation/login")
+    }
+  }, [])
+
   // handle showing section
   const router = useRouter();
   const { section } = router.query;

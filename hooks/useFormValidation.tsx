@@ -1,7 +1,7 @@
 export const useFormValidation = () => {
   const getValidation = (
-    data:object
-  ): { status: boolean; message: string ,field:string } => {
+    data: object
+  ): { status: boolean; message: string; field: string } => {
     var checkedStatusItems = [];
     // const objFormData = Object.fromEntries(form.entries());
     for (const key in data) {
@@ -13,7 +13,7 @@ export const useFormValidation = () => {
           return {
             status: resultValidation.status,
             message: resultValidation.message,
-            field:key
+            field: key,
           };
         }
       }
@@ -21,7 +21,7 @@ export const useFormValidation = () => {
     return {
       status: true,
       message: `Validation was done for: ${checkedStatusItems.join(" , ")}`,
-      field:""
+      field: "",
     };
   };
 
@@ -38,12 +38,12 @@ const validation = (
   var message = "h";
 
   switch (type) {
-      case "username":
-        CHECK = value[0]?.length >= 5 ? true : false;
-        if (!CHECK) {
-          message = "Username must be more than 5 characters";
-        }
-        break;
+    case "username":
+      CHECK = value[0]?.length >= 5 ? true : false;
+      if (!CHECK) {
+        message = "Username must be more than 5 characters";
+      }
+      break;
     case "email":
       let email = /\S+@\S+\.\S+/;
       CHECK = email.test(value[0]);
@@ -59,12 +59,34 @@ const validation = (
         message = "Password must be more than 8 characters.";
       }
       break;
-      case "g-recaptcha-response":
-        CHECK = value[0]?.length >= 5 ? true : false;
-        if (!CHECK) {
-          message = "Please complete the Recaptcha";
-        }
-        break;
+
+    // for articles
+    case "title":
+      CHECK = value[0]?.length >= 3 ? true : false;
+      if (!CHECK) {
+        message = "Title must be more than 3 characters";
+      }
+      break;
+    case "description":
+      CHECK = value[0]?.length >= 10 ? true : false;
+      if (!CHECK) {
+        message = "Description must be more than 10 characters";
+      }
+      break;
+      case "body":
+      console.log('value[0] :>> ', value[0]);
+      CHECK = value[0]?.length >= 10 ? true : false;
+      if (!CHECK) {
+        message = "Body must be more than 10 characters";
+      }
+      break;
+
+    case "g-recaptcha-response":
+      CHECK = value[0]?.length >= 5 ? true : false;
+      if (!CHECK) {
+        message = "Please complete the Recaptcha";
+      }
+      break;
       break;
     default:
       break;

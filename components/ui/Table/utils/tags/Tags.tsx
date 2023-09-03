@@ -3,7 +3,7 @@ import styles from "./_style.module.scss";
 
 function Tags({data}) {
 
-  if (data.length == 0&& !!!data) return null;
+  if (data.length == 0&& !!data) return null;
 
   const mySliceData = data.slice();
 

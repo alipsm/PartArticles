@@ -11,9 +11,6 @@ function applyStyleToValue(item:""|[],index:0,props:tableInterface) {
         console.log('item :>> ', item);
         console.groupEnd()
         return <Tags data={item}/>
-
-
-
     }
   return (item )
 }

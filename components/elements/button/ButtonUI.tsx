@@ -10,13 +10,14 @@ interface myProps {
   fontSize?:number,
   image?:{src:StaticImageData|string,alt:string}
   disable?:boolean
+  classes?:string
 }
 
 export default function ButtonUI(props: myProps) {
   return (
     <div
       id={btnStyles.ButtonUi}
-      className={`${props.fullWidth && btnStyles.fullWidtdh}`}>
+      className={`${props.classes}`}>
         
       <button
         onClick={() =>
@@ -24,7 +25,7 @@ export default function ButtonUI(props: myProps) {
         }
         className={`${btnStyles.btnBaseStyle} ${
           !!props.type ? btnStyles[props.type] : btnStyles.Primary
-        } ${props.disable&& btnStyles.disable}`}
+        } ${props.disable&& btnStyles.disable} ${props.fullWidth && btnStyles.fullWidth}`}
         style={{"fontSize":props.fontSize}}>
         {!!props.image&&<Image src={props.image.src} alt={props.image.alt} width={28}/>}
         {props.text}

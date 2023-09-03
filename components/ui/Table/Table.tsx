@@ -5,8 +5,15 @@ import styles from "./_style.module.scss";
 
 const { getColumnsNumber } = require("./utils/CalculateColumns.tsx");
 const { applyStyleToValue } = require("./utils/applyStyleToValue.tsx");
+const { checkPathsLenght } = require("./types/tableInterface.ts");
 
 export default function Table(props: tableInterface) {
+  if (!checkPathsLenght(props)) {
+    console.warn(
+      "عنوان ها با مسیر ها باید طول یکسانی داشته باشند \n لطفا به طول مقادیر دقت کنید"
+    );
+    return;
+  }
   const getColumnCount = getColumnsNumber(props);
   const getStyleForRow = (index: number): string => {
     if (index == 0 && !props.showIndex) {
@@ -16,7 +23,6 @@ export default function Table(props: tableInterface) {
     }
     return "";
   };
-  console.log(getColumnCount);
 
   return (
     <div
@@ -46,7 +52,7 @@ export default function Table(props: tableInterface) {
       {/*row cells */}
       {props.data.map((item, rowIndex) => (
         <>
-        {/* Index (optional) */}
+          {/* Index (optional) */}
           {props.showIndex && (
             <div className={`${styles.table_cell} ${styles.firstRow}`}>
               <p>{rowIndex + 1}</p>
@@ -54,7 +60,18 @@ export default function Table(props: tableInterface) {
           )}
 
           {/* cell data */}
-          {Object.keys(item).map((objectKey, index) => (
+          {props.paths.map((objectKey, index) => (
+            <div
+              key={index}
+              className={`${styles.table_cell} ${
+                styles[getStyleForRow(index)]
+              }`}>
+              <p>{applyStyleToValue(item[objectKey], index, props)}</p>
+            </div>
+          ))}
+
+
+          {/* {Object.keys(item).map((objectKey, index) => (
             <div
               key={index}
               className={`${styles.table_cell} ${
@@ -62,7 +79,7 @@ export default function Table(props: tableInterface) {
               }`}>
               <p>{applyStyleToValue(item[objectKey],index,props)}</p>
             </div>
-          ))}
+          ))} */}
 
           {/* Action (optional) */}
           {props.showAction && (
@@ -78,23 +95,6 @@ export default function Table(props: tableInterface) {
           )}
         </>
       ))}
-
-      {/* {return Object.keys(item).map((objectKey,index)=>(
-             <>
-             <div key={index} className={`${styles.table_cell} ${styles[getStyleForRow(index)]}`}><p>{item[objectKey]}</p></div>
-             </>
-         ))} */}
-
-      {/* <div className={styles.table_header}>header 2</div> */}
-      {/* <div className={`${styles.table_header} ${styles.lastRow}`}>header 3</div> */}
-
-      {/* <div className={styles.table_cell}>ali</div>
-        <div className={styles.table_cell}>parsamanesh</div>
-        <div className={styles.table_cell}>stooormix@gmail.com</div>
-
-        <div className={styles.table_cell}>stooormix@gmail.com</div>
-        <div className={styles.table_cell}>stooormix@gmail.com</div>
-        <div className={styles.table_cell}>stooormix@gmail.com</div> */}
     </div>
   );
 }

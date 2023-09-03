@@ -10,6 +10,8 @@ interface InputUiProps {
   placeholder?: string;
   classes?: string;
   name: string;
+  inputType?:"TextBox"|"TextArea"
+  value?:string
 }
 export default function InputUI(props: InputUiProps) {
   return (
@@ -19,13 +21,25 @@ export default function InputUI(props: InputUiProps) {
         props.classes
       }`}>
       <Title text={props.title} error={props.error} inputName={props.name} require={props.require} />
+      {props.inputType=="TextArea"?(
+        <textarea
+        
+        name={props.name}
+        className=""
+        onChange={(e) => handleChange(props.getInputValue, e)}
+        placeholder={props.placeholder}
+        
+        />
+      ):(
       <input
+       value={!!!props.value?props.value:null}
         type={"text"}
         name={props.name}
         className=""
         onChange={(e) => handleChange(props.getInputValue, e)}
         placeholder={props.placeholder}
       />
+      )}
       <ErrorText error={props.error} inputName={props.name} />
     </div>
   );

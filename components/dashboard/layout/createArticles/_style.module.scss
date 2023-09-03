@@ -1,0 +1,27 @@
+
+
+
+
+#CreateArticles{
+
+    .createArticleBtn{
+        button{
+
+            border-radius: 32px !important;
+            margin-top: 32px;
+        }
+    }
+
+    main{
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        form{
+            &:first-child{
+                flex: 50%;
+                padding-right: 49px;
+            }
+        }
+    }
+}

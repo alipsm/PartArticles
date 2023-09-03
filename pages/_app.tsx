@@ -5,9 +5,13 @@ import "../styles/style.css";
 import '../styles/index.scss'
 import {ToastifyContainer} from "../components/ui/Tooltip/ToastifyContainer";
 import  { ToastProvider, useToast } from "../components/ui/Tooltip/ToolTipsContext";
+import Router from 'next/router'
 
 export default function App({ Component, pageProps }: AppProps) {
   const [first, setfirst] = useState(0)
+
+  
+  
   
   return (
     <>

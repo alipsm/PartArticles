@@ -1,0 +1,76 @@
+
+
+
+$bg_header:#eeeeee;
+$bg_close_tag:#bfbfbf;
+$border_color:#b0b0b0;
+
+#CreateTagBox{
+    .box{
+        overflow: hidden;
+        border: 1px solid $border_color;
+        border-radius: 8px;
+        max-width: 400px;
+
+    }
+    header{
+
+        display: flex;
+        background-color:$bg_header;
+        justify-content: baseline;
+        align-items: center;
+        padding: 0px 10px;
+        box-sizing: border-box;
+        .addTagsBtn{
+            button{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 48px;
+                width: 48px;
+                margin: 0px !important;
+                padding: 0px !important;
+                img{
+
+                    margin-right: 0px !important;
+                }
+            }
+        }
+    }
+    main{
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        row-gap: 8px;
+        flex-wrap: wrap;
+        min-height: 100px;
+        max-width: 300px;
+        padding: 16px;
+        box-sizing: border-box;
+
+        .tag{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 36px;
+            box-sizing: border-box;
+            background-color: $bg_header;
+            border-radius: 18px;
+            padding: 0px 4px 0px 14px;
+            span{
+                font-size: 17px;
+            }
+            div{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: $bg_close_tag;
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                margin-left: 11px;
+                cursor: pointer;
+            }
+        }
+    }
+}
