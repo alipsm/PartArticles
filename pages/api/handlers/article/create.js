@@ -32,8 +32,8 @@ app.post(
       if (!!!userToken)
         return res.status(400).json({ message: "token isn't valid" });
       try {
-        const articleId= crypto.randomBytes(16).toString("hex")
-        const createArticle = new Article({...req.body,username:userToken.username,uuid:articleId});
+        const articleID= crypto.randomBytes(16).toString("hex")
+        const createArticle = new Article({...req.body,username:userToken.username,uuid:articleID});
         await createArticle.save();
         return res.status(201).json(createArticle);
       } catch (error) {

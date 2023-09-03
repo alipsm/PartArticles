@@ -7,7 +7,7 @@ import partIcon from './img/partIco.png'
 function Header({title="Title",description}) {
   return (
     <div id={styles.HeaderCards}>
-      <Image src={partIcon} alt="part icon" width={65}/>
+      <Image priority={true} src={partIcon} alt="part icon" width={65}/>
       <p>{title}</p>
       <span>{description}</span>
     </div>

@@ -49,11 +49,8 @@ export default function useArticleCRUD() {
     }
   }
 
-  async function deleteArticle(articleId:string) {
-    const { getValidation } = useFormValidation();
-
+  async function deleteArticle(articleID:string) {
     try {
-      console.log('articleId', articleId)
       const token= localStorage.getItem("token");
       if (!!!token) throw new Error("Token is Empity!")
       const { data, status } = await axios
@@ -61,7 +58,7 @@ export default function useArticleCRUD() {
           headers: {
             "Content-Type": "application/json",
             token: token || "",
-            "article-id":articleId || ""
+            "article-id":articleID || ""
           },
         })
         .catch((e) => {
@@ -76,6 +73,29 @@ export default function useArticleCRUD() {
     }
   }
 
+  async function editArticle(formDataObject:object,articleID:string) {
+    try {
+      const token= localStorage.getItem("token");
+      if (!!!token) throw new Error("Token is Empity!")
+      const { data, status } = await axios
+        .put(`/api/handlers/article/edit`,formDataObject, {
+          headers: {
+            "Content-Type": "application/json",
+            token: token || "",
+            "article-id":articleID || ""
+          },
+        })
+        .catch((e) => {
+          throw new Error(e.response.data.message);
+        });
+      if (status == 204) {
+        return true;
+      }
+      throw new Error("Please try again status code:" + status);
+    } catch (error: any) {
+      throw Error(error.message);
+    }
+  }
 
-  return { createArticle ,readMyArticle,deleteArticle};
+  return { createArticle ,readMyArticle,deleteArticle,editArticle};
 }

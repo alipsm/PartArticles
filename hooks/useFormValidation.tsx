@@ -74,7 +74,6 @@ const validation = (
       }
       break;
       case "body":
-      console.log('value[0] :>> ', value[0]);
       CHECK = value[0]?.length >= 10 ? true : false;
       if (!CHECK) {
         message = "Body must be more than 10 characters";

@@ -30,14 +30,14 @@ function ToastifyUi(props: toastInterface) {
         visible ? tolStyles.show : tolStyles.hidden
       }`}>
       <div className={tolStyles.messageParent}>
-        <Image
+        <Image priority={true}
           src={ImageContainer[props.type]}
           alt={`${props.type} ico`}
           width={24}
         />
         <span>{props.text}</span>
       </div>
-      <Image
+      <Image priority={true}
         src={ImageContainer[props.type + "Close"]}
         alt="close"
         width={14}

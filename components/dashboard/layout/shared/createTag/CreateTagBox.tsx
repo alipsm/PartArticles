@@ -42,7 +42,7 @@ export default function CreateTagBox({onChange}) {
                 <div className={style.tag}>
                     <span>{item}</span>
                     <div>
-                        <Image src={closePicture} alt="close" width={10} onClick={()=>removeTag(item)}/>
+                        <Image priority={true} src={closePicture} alt="close" width={10} onClick={()=>removeTag(item)}/>
                     </div>
                 </div>
             ))}

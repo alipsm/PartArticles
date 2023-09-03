@@ -6,7 +6,7 @@ import Image from 'next/image'
 function Banner({username="username",email="example@gmail.com"}) {
   return (
     <div id={styles.Banner}>
-        <Image src={smilePicture} alt="smile" width={64}/>
+        <Image priority={true} src={smilePicture} alt="smile" width={64}/>
         <div>
           <p>{username}</p>
           <span>{email}</span>

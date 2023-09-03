@@ -33,11 +33,11 @@ app.delete(
         return res.status(400).json({ message: "token isn't valid" });
 
       try {
-        const articleId = req.headers["article-id"];
-        if (!!!articleId)
+        const articleID = req.headers["article-id"];
+        if (!!!articleID)
           return res.status(400).json({ message: "ArticleId is Empity" });
 
-        await Article.deleteOne({'uuid':articleId})
+        await Article.deleteOne({'uuid':articleID})
           .then(async() => {
             const articles= await Article.find();
             return res.status(200).json(articles)

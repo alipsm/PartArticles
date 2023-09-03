@@ -18,27 +18,24 @@ const createArticleSchema = [
 ];
 
 const editArticleSchema = [
-    body("articleId")
-    .notEmpty()
-    .withMessage("ArticleId is Empity!")
-    .isLength({ min: 6, max: 50 })
-    .withMessage("ArticleId length is out of range"),
-    body("title")
-    .notEmpty()
-    .withMessage("Title is Empity!")
-    .isLength({ min: 6, max: 500 })
-    .withMessage("Title length is out of range"),
-  body("description")
-    .notEmpty()
-    .withMessage("Description is Empity!"),
-    body("body")
-    .notEmpty()
-    .withMessage("Body is Empity!"),
-  header("token").notEmpty().withMessage("Token is Empity!"),
+  body("title")
+  .notEmpty()
+  .withMessage("Title is Empity!")
+  .isLength({ min: 3, max: 500 })
+  .withMessage("Title length is out of range"),
+body("description")
+  .notEmpty()
+  .withMessage("Description is Empity!"),
+  body("body")
+  .notEmpty()
+  .withMessage("Body is Empity!"),body("tags")
+  .notEmpty()
+  .withMessage("Tags is Empity!"),
+header("token").notEmpty().withMessage("Token is Empity!"),
 ];
 
 const deleteArticleSchema = [
-    body("articleId")
+    body("articleID")
     .notEmpty()
     .withMessage("ArticleId is Empity!")
     .isLength({ min: 6, max: 50 })

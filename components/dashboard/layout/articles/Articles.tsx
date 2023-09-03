@@ -19,7 +19,8 @@ export default function Articles() {
   const {showToast} = useToast()
 
   function onEditFun(e) {
-    console.log("edit function :>> ", e);
+    sessionStorage.setItem("articleID",JSON.stringify(e.uuid))
+    Router.push("edit")
   }
 
   async function onDeleteFun(e) {
@@ -55,7 +56,7 @@ export default function Articles() {
       <Table
         data={tableData}
         titles={["Title", "Author", "Tags", "Excerpt", "Created At"]}
-        paths={["title","username","tags","body","articleId"]}
+        paths={["title","username","tags","body","createAt"]}
         showAction={{ onDelete: onDeleteFun, onEdit: onEditFun}}
         setTagStyleForColumn={3}
         showIndex

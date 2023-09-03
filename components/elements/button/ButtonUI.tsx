@@ -27,7 +27,7 @@ export default function ButtonUI(props: myProps) {
           !!props.type ? btnStyles[props.type] : btnStyles.Primary
         } ${props.disable&& btnStyles.disable} ${props.fullWidth && btnStyles.fullWidth}`}
         style={{"fontSize":props.fontSize}}>
-        {!!props.image&&<Image src={props.image.src} alt={props.image.alt} width={28}/>}
+        {!!props.image&&<Image priority={true} src={props.image.src} alt={props.image.alt} width={28}/>}
         {props.text}
       </button>
     </div>

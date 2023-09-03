@@ -8,10 +8,10 @@ export default function Actions({onDelete,onEdite,item}) {
   return (
     <div id={styles.Actions}>
       <div className={styles.delete} onClick={()=>onDelete(item)}>
-        <Image src={deletePicture} alt="delete" width={20}/>
+        <Image priority={true} src={deletePicture} alt="delete" width={20}/>
       </div>
       <div className={styles.edit} onClick={()=>onEdite(item)}>
-        <Image src={editPicture} alt="edit" width={20}/>
+        <Image priority={true} src={editPicture} alt="edit" width={20}/>
       </div>
     </div>
   )
