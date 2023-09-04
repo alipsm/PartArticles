@@ -1,0 +1,89 @@
+$logoSizeBeforAnimation: 144px;
+$logoSizeAfterAnimation: 244px;
+
+$bg_animation: rgba(0, 0, 0, 0.5);
+
+#UserEntryAnimation {
+  position: fixed;
+  background-color: $bg_animation;
+  width: 100vw;
+  height: 100vh;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10000;
+  opacity: 0;
+  animation: userEntryAnimationBody ease 4s 300ms forwards;
+}
+
+.container {
+  display: flex;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10000;
+}
+.container div {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  position: absolute;
+  width: $logoSizeAfterAnimation;
+  animation: logo_animation ease-in-out 2.5s 500ms forwards;
+  right: -70px;
+  z-index: 100;
+}
+.banner {
+  position: absolute;
+  width: $logoSizeAfterAnimation;
+  animation: banner_animation ease 1.5s 1.5s forwards;
+  opacity: 0;
+  right: 0px;
+  z-index: 10;
+}
+
+@keyframes logo_animation {
+  0% {
+    width: $logoSizeAfterAnimation;
+    height: $logoSizeAfterAnimation;
+  }
+  50% {
+    width: $logoSizeBeforAnimation;
+    height: $logoSizeBeforAnimation;
+  }
+  100% {
+    right: 100px;
+    width: $logoSizeBeforAnimation;
+    height: $logoSizeBeforAnimation;
+  }
+}
+
+@keyframes banner_animation {
+  0% {
+    right: 0px;
+  }
+  100% {
+    right: -170px;
+    opacity: 1;
+  }
+}
+
+@keyframes userEntryAnimationBody {
+  0% {
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

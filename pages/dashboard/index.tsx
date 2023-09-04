@@ -1,16 +1,16 @@
 import Router from 'next/router'
 import React, { useEffect } from 'react'
-import SideBarMenu from '../../components/dashboard/SideBarMenu/SidebarMenu'
 import MainDashboard from './[...section]'
 
 export default function Dashboard() {
   useEffect(() => {
-    // typeof window !=undefined&& Router.replace("/dashboard/articles")
+    // setTimeout(() => {
+      typeof window !=undefined&& Router.replace("/dashboard/articles")
+    // }, 4000);
   }, [])
   
   return (
     <div id='Dashboard'>
-      {/* <SideBarMenu/> */}
       <MainDashboard/>
     </div>
   )

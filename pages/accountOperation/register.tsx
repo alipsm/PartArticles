@@ -6,6 +6,9 @@ import useFormValidation from "../../hooks/useFormValidation";
 import useUserRegistration from "../../hooks/useRegistration";
 
 export default function Register() {
+
+  const [loading, setLoading] = useState(false)
+
   const {showToast}=useToast()
   const { getValidation } = useFormValidation();
   const { register } = useUserRegistration();
@@ -18,12 +21,14 @@ export default function Register() {
       const token=e["g-recaptcha-response"];
       delete e["g-recaptcha-response"]
       try {
+        setLoading(true)
         const data=await register(e,token)
         localStorage.setItem("token",data.token);
-        console.log( "api data is:",data)
         Router.replace("/dashboard")
       } catch (error) {
         showToast({text:error.message,type:"Error"})
+      }finally{
+        setLoading(false)
       }
     } else {
       setInputError({name:field,text:message})
@@ -34,7 +39,7 @@ export default function Register() {
   return (
     <div id="RegisterPage">
       <div>
-        <RegisterForm onSubmitForm={handleSubmitRegisterForm} setInputError={{name:inputError.name,text:inputError.text}}/>
+        <RegisterForm onSubmitForm={handleSubmitRegisterForm} setInputError={{name:inputError.name,text:inputError.text}} isLoading={loading}/>
       </div>
     </div>
   );

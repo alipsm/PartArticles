@@ -1,50 +1,87 @@
+$border_color: #b0b0b0;
+$description_color: #00000099;
 
-$border_color:#b0b0b0;
-$description_color:#00000099;
+$card_padding: 48px;
 
-$card_padding:48px;
+$title_font_size: 36px;
 
-$title_font_size:36px;
-
-#HeaderCards{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-bottom: 84px;
-    p{
-        margin-top: 24px;
-        font-size: $title_font_size;
+#HeaderCards {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 84px;
+  .pictureContainer {
+    position: relative;
+    width: 65px;
+    height: 65px;
+    img {
+      &:last-child {
+        position: absolute;
+        opacity: 0;
+        left: 10px;
+        top: 10px;
+        animation: redSidePartLogoAnimation ease-in-out 500ms 600ms forwards;
+      }
     }
-    span{
-        margin-top: 13px;
-        font-size: 20px;
-        color: $description_color;
-    }
+  }
+  p {
+    margin-top: 24px;
+    font-size: $title_font_size;
+  }
+  span {
+    margin-top: 13px;
+    font-size: 20px;
+    color: $description_color;
+  }
 }
 
+#RegisterForm,
+#LoginForm {
+  box-sizing: border-box;
+  border: 1px solid $border_color;
+  border-radius: 24px;
+  padding: $card_padding;
 
-#RegisterForm,#LoginForm{
-    box-sizing: border-box;
-    border: 1px solid $border_color;
-    border-radius: 24px;
-    padding: $card_padding;
+  // org max-with is 580px
+  max-width: 500px;
+  opacity: 0;
 
-    // org max-with is 580px
-    max-width: 500px;
-    
-    width: 100%;
-    // min-height: 1050px;
-    #InputUi{
-    }
-    .textInput{
-        margin-bottom: 60px;
-    }
-    .recaptcha{
-        display: flex;
-        justify-content: center;
-        margin: auto;
-        max-width: 200px;
-    }
+  width: 100%;
+  // min-height: 1050px;
+  #InputUi {
+  }
+  .textInput {
+    margin-bottom: 60px;
+  }
+  .recaptcha {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    max-width: 200px;
+  }
+  animation: showingAuthForm ease-in-out 500ms 200ms forwards;
+}
+
+@keyframes redSidePartLogoAnimation {
+  0% {
+    left: 10px;
+    top: 10px;
+    opacity: 0;
+  }
+  100% {
+    left: 0px;
+    top: 0px;
+    opacity: 1;
+  }
+}
+
+@keyframes showingAuthForm {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

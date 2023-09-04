@@ -9,6 +9,7 @@ import styles from "./_styles.module.scss";
 export default function RegisterForm({
   onSubmitForm,
   setInputError = { name: "", text: "" },
+  isLoading=false
 }) {
   const capRef = useRef(null);
   const { Header } = require("./Header.tsx");
@@ -56,7 +57,7 @@ export default function RegisterForm({
           ref={capRef}
         />
         <br />
-        <ButtonUI text="Sign Up" fullWidth/>
+        <ButtonUI text="Sign Up" disable={isLoading} fullWidth/>
         <br />
         <Link href={"login"}>
           <ButtonUI text="Login" type="Secondary" fullWidth/>

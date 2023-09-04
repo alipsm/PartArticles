@@ -80,7 +80,7 @@ export default function Table(props: tableInterface) {
 
   const memoizedPagination = useMemo(
     () => (
-      <Pagination apiData={apiData} onSetTableData={(e) => setTableData(e)} />
+      <Pagination apiData={apiData} setTableData={setTableData} rowCount={props.rowCount}/>
     ),
     []
   );
@@ -98,16 +98,6 @@ export default function Table(props: tableInterface) {
     ),
     [!!!deleteItemData == true]
   );
-  // debugger
-  // console.log("tableData", tableData);
-
-  function startSetTableData(e) {
-    console.log("e :>> ", e);
-    setTableData(e);
-  }
-
-  // pagination section
-  console.log('props', props)
 
   return (
     <>
@@ -178,11 +168,11 @@ export default function Table(props: tableInterface) {
             </>
           ))}
       </div>
-      {/* {memoizedPagination} */}
+      {memoizedPagination}
       {/* <Pagination apiData={apiData} onSetTableData={e=>startSetTableData(e)} />, */}
 
       {/* pagination section */}
-      <Pagination apiData={apiData} setTableData={setTableData} rowCount={props.rowCount}/>
+      {/* <Pagination apiData={apiData} setTableData={setTableData} rowCount={props.rowCount}/> */}
 
       {memoizedDeleteArticleModal}
     </>

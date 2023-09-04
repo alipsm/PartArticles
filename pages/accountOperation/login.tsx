@@ -7,6 +7,8 @@ import useUserLogination from "../../hooks/useLogination";
 
 export default function Login() {
 
+  const [loading, setLoading] = useState(false)
+
     const {showToast}=useToast()
     const { getValidation } = useFormValidation();
     const { login } = useUserLogination();
@@ -17,12 +19,14 @@ export default function Login() {
         const { status, message ,field} = getValidation(e);
         if (status) {
           try {
+            setLoading(true)
             const data=await login(e)
             localStorage.setItem("token",data.token);
-            console.log( "api data is:",data)
             Router.replace("/dashboard")
           } catch (error) {
             showToast({text:error.message,type:"Error"})
+          }finally{
+            setLoading(false)
           }
         } else {
           setInputError({name:field,text:message})
@@ -33,7 +37,7 @@ export default function Login() {
   return (
     <div id="LoginPage">
       <div>
-        <LoginForm onSubmitForm={handleSubmitRegisterForm} setInputError={{name:inputError.name,text:inputError.text}}/>
+        <LoginForm onSubmitForm={handleSubmitRegisterForm} setInputError={{name:inputError.name,text:inputError.text}} isLoading={loading}/>
       </div>
     </div>
   );

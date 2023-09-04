@@ -43,14 +43,12 @@ app.delete(
             return res.status(200).json(articles)
           })
           .catch((e) => {
-            console.log('e', e)
             return res.status(500).json({
               message: "Problem in deleting the article",
             });
           });
           return res.status(204).send()
       } catch (error) {
-        console.log(error)
         return res.status(500).json({
           message: "خطای داخلی سرور لطفا بعدا تلاش کنید",
         });

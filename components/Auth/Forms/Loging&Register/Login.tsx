@@ -7,6 +7,7 @@ import styles from "./_styles.module.scss";
 export default function LoginForm({
   onSubmitForm,
   setInputError = { name: "", text: "" },
+  isLoading=false
 }) {
   const { Header } = require("./Header.tsx");
 
@@ -37,7 +38,7 @@ export default function LoginForm({
           error={setInputError}
           require
         />
-        <ButtonUI text="Login" fullWidth/>
+        <ButtonUI text="Login" disable={isLoading} fullWidth/>
         <br />
         <Link href={"register"}>
           <ButtonUI text="Register" type="Secondary" fullWidth/>

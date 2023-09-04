@@ -39,7 +39,6 @@ export default function EditArticles() {
       try {
         const getArticleId = sessionStorage.getItem("articleID");
         const articleData = { ...e, tags: myTags };
-        console.log('getArticleId', getArticleId)
         await editArticle(articleData,getArticleId);
         showToast({ text: "Article Edited successfully", type: "Success" });
         Router.replace("articles");

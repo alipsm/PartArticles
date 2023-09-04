@@ -25,7 +25,6 @@ export default function GetMainDashboard({ section = "" }) {
             
         //     Router.push("/dashboard/articles");
         // }
-        // console.log('window')
         // setTimeout(() => {
         // }, 1000);
         break;

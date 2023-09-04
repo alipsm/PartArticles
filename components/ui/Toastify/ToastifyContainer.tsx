@@ -10,7 +10,6 @@ export function ToastifyContainer() {
     return (
       <div id={tolStyles.ToolTipContainer}>
         {toasts.map((item) => {
-          console.log("item", item);
           return (
             <div key={item.index}>
               <ToastifyUi

@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 
 function generateJWT(data) {
   dotenv.config();
-  console.log('data :>> ', data);
   const token = jwt.sign(data, process.env.JWT_SECRET_KEY);
   return token;
 }
