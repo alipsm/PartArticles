@@ -5,12 +5,12 @@ import MainDashboard from './[...section]'
 
 export default function Dashboard() {
   useEffect(() => {
-    Router.replace("/dashboard/articles")
+    // typeof window !=undefined&& Router.replace("/dashboard/articles")
   }, [])
   
   return (
     <div id='Dashboard'>
-      <SideBarMenu/>
+      {/* <SideBarMenu/> */}
       <MainDashboard/>
     </div>
   )

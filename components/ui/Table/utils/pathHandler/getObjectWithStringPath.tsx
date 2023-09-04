@@ -5,9 +5,10 @@
 
     let value = data;
   
-    if (!!!getKeys) {
+    if (!!!getKeys||!!!data) {
       return "{not Found}"
     }
+    debugger
     for (const key of getKeys) {
       if (key !== "") {
         if (value.hasOwnProperty(key)) {

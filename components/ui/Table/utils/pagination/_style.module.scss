@@ -34,4 +34,7 @@ margin-top: 40px;
             background-color: darken($color: $bg_button, $amount: 5);
         }
     }
+    button,img{
+        cursor: pointer;
+    }
 }

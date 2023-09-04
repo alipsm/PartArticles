@@ -21,7 +21,7 @@ export default function SidebarMenu() {
         <Header />
         <br />
         <main>
-          <Link href={"articles"}>
+          <Link href={"/dashboard/articles"}>
             <ButtonUI
               text="All Articles"
               fontSize={22}

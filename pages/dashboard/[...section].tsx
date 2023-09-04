@@ -8,7 +8,7 @@ export default function MainDashboard() {
   useEffect(() => {
     const token=localStorage.getItem('token')
     if (!!!token) {
-      Router.replace("/accountOperation/login")
+      window !=undefined&& Router.replace("/accountOperation/login")
     }
   }, [])
 

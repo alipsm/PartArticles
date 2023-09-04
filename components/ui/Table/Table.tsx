@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { tableInterface } from "./types/tableInterface";
 import Actions from "./utils/actions/Actions";
-import Pagination from "./utils/pagination/Pagination";
+// import Pagination from "./utils/pagination/controller";
 import styles from "./_style.module.scss";
 
 import apiData from "./utils/ApiData.json";
@@ -14,12 +14,12 @@ const { checkPathsLenght } = require("./types/tableInterface.ts");
 const {
   getObjectValueWithStringPath,
 } = require("./utils/pathHandler/getObjectWithStringPath.tsx");
+const {Pagination} = require("./utils/pagination/controller.tsx")
 
 export default function Table(props: tableInterface) {
   function handleStartFindPaths(data) {
-    var getFullPath = findNestedValue(data[0], data[0], ["batter"]) || "";
-    console.log("getFullPath", getFullPath);
-
+    // var getFullPath = findNestedValue(data[0], data[0], ["batter"]) || "";
+    // console.log("getFullPath", getFullPath);
     // const yieldFindNestedValue = findNestedValue(data[0]);
     // const getFullPath= yieldFindNestedValue.next().value
     //  yieldFindNestedValue.next().value
@@ -28,7 +28,6 @@ export default function Table(props: tableInterface) {
     //   var getFullPath=
     //   // console.log("start", myObject.lenght);
     //   // try {
-
     //   //   console.log(getFullPath)
     //   // } catch (error) {
     //   // }
@@ -53,12 +52,16 @@ export default function Table(props: tableInterface) {
     return;
   }
 
-  const [tableData, setTableData] = useState(props.data);
-  const [deleteItemData, setDeleteItemData] = useState();
+  const [tableData, setTableData] = useState(null);
+  const [deleteItemData, setDeleteItemData] = useState(null);
+  // useEffect(() => {
+  //   console.log('tableData in useEffect :>> ', tableData);
+  // }, [tableData.length])
 
-  useEffect(() => {
-    setTableData(props.data);
-  }, [props.data.length]);
+  // console.log("tableData :>> ", tableData);
+  // useEffect(() => {
+  //   setTableData(props.data);
+  // }, [props.data.length]);
 
   const getColumnCount = getColumnsNumber(props);
   const getStyleForRow = (index: number): string => {
@@ -71,9 +74,40 @@ export default function Table(props: tableInterface) {
   };
 
   function handleDeleteTableItem() {
-    props.showAction.onDelete(deleteItemData)
-    setDeleteItemData()
+    props.showAction.onDelete(deleteItemData);
+    setDeleteItemData(null);
   }
+
+  const memoizedPagination = useMemo(
+    () => (
+      <Pagination apiData={apiData} onSetTableData={(e) => setTableData(e)} />
+    ),
+    []
+  );
+  const memoizedDeleteArticleModal = useMemo(
+    () => (
+      <DeleteArticleModal
+        articleTitle={getObjectValueWithStringPath(
+          deleteItemData,
+          props.showAction.titlePath
+        )}
+        onClose={setDeleteItemData}
+        showModal={!!deleteItemData}
+        onDelete={handleDeleteTableItem}
+      />
+    ),
+    [!!!deleteItemData == true]
+  );
+  // debugger
+  // console.log("tableData", tableData);
+
+  function startSetTableData(e) {
+    console.log("e :>> ", e);
+    setTableData(e);
+  }
+
+  // pagination section
+  console.log('props', props)
 
   return (
     <>
@@ -104,72 +138,53 @@ export default function Table(props: tableInterface) {
         )}
 
         {/*row cells */}
-        {tableData.map((item, rowIndex) => (
-          <>
-            {/* Index (optional) */}
-            {props.showIndex && (
-              <div
-                key={rowIndex}
-                className={`${styles.table_cell} ${styles.firstRow}`}>
-                <p>{rowIndex + 1}</p>
-              </div>
-            )}
+        {!!tableData &&
+          tableData.map((item, rowIndex) => (
+            <>
+              {/* Index (optional) */}
+              {props.showIndex && (
+                <div
+                  key={rowIndex}
+                  className={`${styles.table_cell} ${styles.firstRow}`}>
+                  <p>{rowIndex + 1}</p>
+                </div>
+              )}
 
-            {/* cell data */}
-            {props.paths.map((objectKey, index) => (
-              <div
-                key={index}
-                className={`${styles.table_cell} ${
-                  styles[getStyleForRow(index)]
-                }`}>
-                <p>{applyStyleToValue(item[objectKey], index, props)}</p>
-              </div>
-            ))}
+              {/* cell data */}
+              {props.paths.map((objectKey, index) => (
+                <div
+                  key={index}
+                  className={`${styles.table_cell} ${
+                    styles[getStyleForRow(index)]
+                  }`}>
+                  <p>{applyStyleToValue(item[objectKey], index, props)}</p>
+                </div>
+              ))}
 
-            {/* {Object.keys(item).map((objectKey, index) => (
-            <div
-              key={index}
-              className={`${styles.table_cell} ${
-                styles[getStyleForRow(index)]
-              }`}>
-              <p>{applyStyleToValue(item[objectKey],index,props)}</p>
-            </div>
-          ))} */}
-
-            {/* Action (optional) */}
-            {props.showAction && (
-              <div
-                key={"action" + rowIndex}
-                className={`${styles.table_cell} ${styles.lastRow}`}>
-                <p>
-                  {/* <Actions
-                    onEdite={props.showAction.onEdit}
-                    onDelete={props.showAction.onDelete}
-                    item={item}
-                  /> */}
-                  <Actions
-                    onEdite={props.showAction.onEdit}
-                    onDelete={setDeleteItemData}
-                    item={item}
-                  />
-                </p>
-              </div>
-            )}
-          </>
-        ))}
+              {/* Action (optional) */}
+              {props.showAction && (
+                <div
+                  key={"action" + rowIndex}
+                  className={`${styles.table_cell} ${styles.lastRow}`}>
+                  <p>
+                    <Actions
+                      onEdite={props.showAction.onEdit}
+                      onDelete={setDeleteItemData}
+                      item={item}
+                    />
+                  </p>
+                </div>
+              )}
+            </>
+          ))}
       </div>
-      <Pagination {...props} />
-      
-        <DeleteArticleModal
-          articleTitle={getObjectValueWithStringPath(
-            deleteItemData,
-            props.showAction.titlePath
-          )}
-          onClose={setDeleteItemData}
-          showModal={!!deleteItemData}
-          onDelete={handleDeleteTableItem}
-        />
-      
+      {/* {memoizedPagination} */}
+      {/* <Pagination apiData={apiData} onSetTableData={e=>startSetTableData(e)} />, */}
+
+      {/* pagination section */}
+      <Pagination apiData={apiData} setTableData={setTableData} rowCount={props.rowCount}/>
+
+      {memoizedDeleteArticleModal}
     </>
   );
 }
