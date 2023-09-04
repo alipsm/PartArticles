@@ -25,6 +25,6 @@ const TodoSchema = new mongoose.Schema({
   uuid: String,
   createAt: { type: Date, default: Date.now },
 });
-mongoose.deleteModel("Article");
+// mongoose.deleteModel("Article");
 module.exports =
   mongoose.models.Article || mongoose.model("Article", TodoSchema);

@@ -1,0 +1,92 @@
+$bg_close_tag: #bfbfbf;
+$main_font_color: #00000099;
+$bg_modal: #ffff;
+$border_color: #707070;
+            
+$bg_close_btn:#d81515;
+$bg_cancele_btn:#eeee;
+
+
+$font_size: 18px;
+
+$border_radius_size:16px;
+
+#Modal {
+  display: flex;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  left: 0px;
+  top: 0px;
+  background-color: rgba(0, 0, 0, 0.32);
+  .container{
+      background-color: $bg_modal;
+      min-width: 300px;
+      max-width: 550px;
+      box-sizing: border-box;
+      padding: 24px 32px;
+      border: 1px solid $border_color;
+      border-radius: $border_radius_size;
+      header {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0px 30px 0px;
+        h2{
+            font-size: 1.5em;
+        }
+        div {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: $bg_close_tag;
+          width: 28px;
+          height: 28px;
+          border-radius: 50%;
+          margin-left: 11px;
+          cursor: pointer;
+        }
+      }
+    
+      main {
+        font-size: $font_size;
+        color: $main_font_color;
+        line-height: 1.78;
+        min-height: 100px;
+        margin-bottom: 24px;
+      }
+
+      footer{
+          width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        button{
+            border-radius: 16px;
+            border: none;
+            font-size: 0.9em;
+            height: 37px;
+            padding: 0px 20px;
+            cursor: pointer;
+            &.delete{
+                background-color: $bg_close_btn;
+                color: white;
+                &:hover{
+                    background-color: darken($color: $bg_close_btn, $amount: 5);
+                }
+            }
+            &.cancele{
+                margin-right: 8px;
+                background-color: $bg_cancele_btn;
+                color: #000000cc;
+                &:hover{
+                    background-color: darken($color: $bg_cancele_btn, $amount: 5);
+                }
+            }
+        }
+      }
+
+  }
+  // padding-bottom: 24px;
+}

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import ButtonUI from "../components/elements/button/ButtonUI";
-import { useToast } from "../components/ui/Tooltip/ToolTipsContext";
+import { useToast } from "../components/ui/Toastify/ToolTipsContext";
 
 export default function Home() {
   const {toasts,setToasts,onRemove,showToast} = useToast()

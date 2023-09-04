@@ -39,7 +39,7 @@ export default function CreateTagBox({onChange}) {
         </header>
         <main>
             {tags.map(item=>(
-                <div className={style.tag}>
+                <div key={item} className={style.tag}>
                     <span>{item}</span>
                     <div>
                         <Image priority={true} src={closePicture} alt="close" width={10} onClick={()=>removeTag(item)}/>

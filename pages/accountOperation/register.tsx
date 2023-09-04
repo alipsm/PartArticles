@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Router from "next/router";
 import RegisterForm from "../../components/Auth/Forms/Loging&Register/Register";
-import { useToast } from "../../components/ui/Tooltip/ToolTipsContext";
+import { useToast } from "../../components/ui/Toastify/ToolTipsContext";
 import useFormValidation from "../../hooks/useFormValidation";
 import useUserRegistration from "../../hooks/useRegistration";
 

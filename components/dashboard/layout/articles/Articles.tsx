@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import useArticleCRUD from "../../../../hooks/useArticleCRUD";
 // import useArticleCRUD from "../../../../hooks/useArticleCRUD";
 import Table from "../../../ui/Table/Table";
-import { useToast } from "../../../ui/Tooltip/ToolTipsContext";
+import { useToast } from "../../../ui/Toastify/ToolTipsContext";
 
 import addingPicture from './img/adding.png'
 

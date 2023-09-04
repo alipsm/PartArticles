@@ -2,7 +2,7 @@ import Router from "next/router";
 import React, { useEffect, useState } from "react";
 import useArticleCRUD from "../../../../hooks/useArticleCRUD";
 import useFormValidation from "../../../../hooks/useFormValidation";
-import { useToast } from "../../../ui/Tooltip/ToolTipsContext";
+import { useToast } from "../../../ui/Toastify/ToolTipsContext";
 import CreateTagBox from "../shared/createTag/CreateTagBox";
 import styles from "./_style.module.scss";
 
