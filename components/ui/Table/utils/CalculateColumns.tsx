@@ -9,4 +9,14 @@ function getColumnsNumber(params:tableInterface):number {
     return totalCount;
 }
 
-module.exports={getColumnsNumber}
+const getClassStyleForTableRow = (index: number,params:tableInterface): string => {
+    const getColumnCount = getColumnsNumber(params);
+  if (index == 0 && !params.showIndex) {
+    return "firstRow";
+  } else if (index == getColumnCount - (params.showIndex ? 2 : 1)) {
+    return "lastRow";
+  }
+  return "";
+};
+
+module.exports={getColumnsNumber,getClassStyleForTableRow}

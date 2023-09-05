@@ -9,7 +9,6 @@ export default function DeleteArticleModal({
   articleTitle = "article name",
   onClose,
   onDelete,
-  //   onDontDelete,
 }) {
   if (!showModal) {
     return null;

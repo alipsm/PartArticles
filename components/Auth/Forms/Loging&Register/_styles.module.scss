@@ -39,17 +39,14 @@ $title_font_size: 36px;
 
 #RegisterForm,
 #LoginForm {
+  overflow: hidden;
   box-sizing: border-box;
   border: 1px solid $border_color;
   border-radius: 24px;
   padding: $card_padding;
-
-  // org max-with is 580px
   max-width: 500px;
   opacity: 0;
-
   width: 100%;
-  // min-height: 1050px;
   #InputUi {
   }
   .textInput {

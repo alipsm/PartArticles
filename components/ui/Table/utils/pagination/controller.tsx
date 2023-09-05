@@ -3,7 +3,9 @@ import { useState } from "react";
 
 const { View } = require("./view");
 
-function Pagination({ apiData, setTableData, rowCount = 3 }) {
+function Pagination({ apiData, setTableData, rowCount = 3 ,showPagination}) {
+
+  if(!showPagination) return null
   useEffect(() => {
       paginationHandler("first")
   }, [apiData])
@@ -14,7 +16,6 @@ function Pagination({ apiData, setTableData, rowCount = 3 }) {
     currentPage: 0,
   });
   function* paginateData(action: string) {
-    debugger
     const totalItems = apiData.length;
     let innerCurrentPage = paginationData.currentPage;
     let innerStartIndex = paginationData.startIndex;
@@ -47,10 +48,12 @@ function Pagination({ apiData, setTableData, rowCount = 3 }) {
     const data = dataPaginator.next().value;
     setTableData(data);
   }
+  
   return (
     <View
       currentPage={paginationData.currentPage}
       handleOnClick={paginationHandler}
+      totalPage={Math.ceil(apiData.length/rowCount)}
     />
   );
 }

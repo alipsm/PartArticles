@@ -7,7 +7,7 @@
     setTagStyleForColumn?: number ;
     setDateFormatForColumn?: number ;
     rowCount?: number;
-    pagination?: boolean;
+    showPagination?: boolean;
   }
 
   function checkPathsLenght(tableData) {

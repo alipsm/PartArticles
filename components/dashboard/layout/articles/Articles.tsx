@@ -60,6 +60,7 @@ export default function Articles() {
       setTagStyleForColumn={3}
       setDateFormatForColumn={5}
       rowCount={5}
+      showPagination
       showIndex
       />
     ),

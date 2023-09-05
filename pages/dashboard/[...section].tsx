@@ -27,7 +27,7 @@ export default function MainDashboard() {
           section={Array.isArray(section) ? section[0] : undefined}
         />
       </div>
-      {memoizedUserEntryAnimation}
+      {/* {memoizedUserEntryAnimation} */}
     </div>
   );
 }

@@ -7,18 +7,21 @@ import styles from "./_style.module.scss";
 // import apiData from "./utils/ApiData.json";
 import { findNestedValue } from "./utils/smartPath";
 import DeleteArticleModal from "./utils/modal/Modal";
+import SearchBox from "./utils/searchBox/SearchBox";
 
-const { getColumnsNumber } = require("./utils/CalculateColumns.tsx");
+const {
+  getColumnsNumber,
+  getClassStyleForTableRow,
+} = require("./utils/CalculateColumns.tsx");
 const { applyStyleToValue } = require("./utils/applyStyleToValue.tsx");
 const { checkPathsLenght } = require("./types/tableInterface.ts");
-const {convertDateFormat}= require('./utils/convertDate/convertDateFormat.tsx')
+const { getIndexRow } = require("./utils/getIndexRow");
 const {
   getObjectValueWithStringPath,
 } = require("./utils/pathHandler/getObjectWithStringPath.tsx");
 const { Pagination } = require("./utils/pagination/controller.tsx");
 
 export default function Table(props: tableInterface) {
-  console.log("props", props);
   function handleStartFindPaths(data) {
     // var getFullPath = findNestedValue(data[0], data[0], ["batter"]) || "";
     // console.log("getFullPath", getFullPath);
@@ -58,6 +61,9 @@ export default function Table(props: tableInterface) {
     currentPage: 1,
   });
   const [deleteItemData, setDeleteItemData] = useState(null);
+  const [showPagination, setShowPagination] = useState(true);
+  const [searchIndex, setSearchIndex] = useState();
+
   // useEffect(() => {
   //   console.log('tableData in useEffect :>> ', tableData);
   // }, [tableData.length])
@@ -66,16 +72,6 @@ export default function Table(props: tableInterface) {
   // useEffect(() => {
   //   setTableData(props.data);
   // }, [props.data.length]);
-
-  const getColumnCount = getColumnsNumber(props);
-  const getStyleForRow = (index: number): string => {
-    if (index == 0 && !props.showIndex) {
-      return "firstRow";
-    } else if (index == getColumnCount - (props.showIndex ? 2 : 1)) {
-      return "lastRow";
-    }
-    return "";
-  };
 
   function handleDeleteTableItem() {
     props.showAction.onDelete(deleteItemData);
@@ -88,9 +84,10 @@ export default function Table(props: tableInterface) {
         apiData={props.data}
         setTableData={setTableData}
         rowCount={props.rowCount}
+        showPagination={props.showPagination && showPagination}
       />
     ),
-    [props.data.length]
+    [props.data.length, showPagination, searchIndex]
   );
   const memoizedDeleteArticleModal = useMemo(
     () => (
@@ -107,31 +104,15 @@ export default function Table(props: tableInterface) {
     [!!!deleteItemData == true]
   );
 
-  function getRowIndex(index: number) {
-    return index + 1 + (tableData.currentPage - 1) * props.rowCount;
-  }
-
-  function convertDateFormat() {
-    const mydate="2023-09-05T09:31:30.581Z"
-    const dateObject=new Date(mydate)
-    const formattedDate=dateObject.toLocaleString("fa-IR",{
-      year:undefined,
-      month:"long",
-      day:"2-digit",
-      hour:undefined,
-      minute:undefined
-    })
-  }
-
-  convertDateFormat()
-
 
   return (
-    <>
+    <div id={styles.Table}>
       <div
-        id={styles.Table}
+        className={styles.TableDataStructure}
         style={{
-          gridTemplateColumns: `repeat(${getColumnCount},minmax(50px,auto))`,
+          gridTemplateColumns: `repeat(${getColumnsNumber(
+            props
+          )},minmax(50px,auto))`,
         }}>
         {/* headers start */}
         {props.showIndex && (
@@ -143,8 +124,9 @@ export default function Table(props: tableInterface) {
           <div
             key={item}
             className={`${styles.table_header} ${
-              styles[getStyleForRow(index)]
-            }`}>
+              styles[getClassStyleForTableRow(index, props)]
+            }`}
+            onClick={() => setSearchIndex(index)}>
             <p>{item}</p>
           </div>
         ))}
@@ -163,7 +145,13 @@ export default function Table(props: tableInterface) {
                 <div
                   key={rowIndex}
                   className={`${styles.table_cell} ${styles.firstRow}`}>
-                  <p>{getRowIndex(rowIndex)}</p>
+                  <p>
+                    {getIndexRow(
+                      rowIndex,
+                      tableData.currentPage,
+                      props.rowCount
+                    )}
+                  </p>
                 </div>
               )}
 
@@ -172,7 +160,7 @@ export default function Table(props: tableInterface) {
                 <div
                   key={index}
                   className={`${styles.table_cell} ${
-                    styles[getStyleForRow(index)]
+                    styles[getClassStyleForTableRow(index, props)]
                   }`}>
                   <p>{applyStyleToValue(item[objectKey], index, props)}</p>
                 </div>
@@ -195,13 +183,18 @@ export default function Table(props: tableInterface) {
             </>
           ))}
       </div>
-      {memoizedPagination}
-      {/* <Pagination apiData={apiData} onSetTableData={e=>startSetTableData(e)} />, */}
-
-      {/* pagination section */}
-      {/* <Pagination apiData={apiData} setTableData={setTableData} rowCount={props.rowCount}/> */}
-
+      {searchIndex == null && memoizedPagination}
       {memoizedDeleteArticleModal}
-    </>
+      {searchIndex != null ? (
+        <SearchBox
+          apiData={props}
+          getFilteredData={(filteredData) =>
+            setTableData({ ...tableData, data: filteredData })
+          }
+          indexSelected={searchIndex}
+          clearIndexSelected={setSearchIndex}
+        />
+      ) : null}
+    </div>
   );
 }

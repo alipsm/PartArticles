@@ -1,0 +1,45 @@
+$Gray: #eeeeee;
+
+#SearchBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: -70px;
+  input {
+    outline: none;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 12px;
+    background-color: $Gray;
+    font-size: 20px;
+    transition: all linear 300ms;
+    box-sizing: border-box;
+    max-width: 400px;
+    max-height: 200px;
+    min-width: 200px;
+    margin:0px 15px;
+    border: 1px solid darken($color: $Gray, $amount: 10);
+    &:focus {
+      background-color: darken($color: $Gray, $amount: 5);
+    }
+    opacity: 0;
+    animation: showElementWithOpacity ease 500ms 0s forwards;
+  }
+  img {
+    cursor: pointer;
+    transition: all ease-out 70ms;
+    &:hover {
+      rotate: 45deg;
+    }
+  }
+}
+
+@keyframes showElementWithOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
