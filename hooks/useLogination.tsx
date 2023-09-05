@@ -1,28 +1,25 @@
-import axios from "axios";
+import useApi from "./useApi/useApi";
 import useFormValidation from "./useFormValidation";
 
 export default function useUserLogination() {
+  const {post} = useApi()
   async function login(formDataObject: object) {
     const { getValidation } = useFormValidation();
 
     try {
       if (!getValidation(formDataObject)) throw new Error("Empity value!");
-      const { data, status } = await axios
-        .post("/api/handlers/user/login", formDataObject, {
-          headers: {
-            "Content-Type": "application/json"
-          },
-        })
-        .catch((e) => {
-          throw new Error(e.response.data.message);
-        });
-      if (status == 201) {
-        return data;
+      try {
+        const data= await post("/user/login",formDataObject)
+        localStorage.setItem("UnimportantUserData",`${data.username +","+data.email}`)
+        return data
+      } catch (error) {
+        throw new Error(error.message)
       }
-      throw new Error("Please try again status code:" + status);
     } catch (error: any) {
       throw Error(error.message);
     }
   }
+
+  
   return { login };
 }

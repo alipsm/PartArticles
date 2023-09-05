@@ -4,19 +4,21 @@ import Actions from "./utils/actions/Actions";
 // import Pagination from "./utils/pagination/controller";
 import styles from "./_style.module.scss";
 
-import apiData from "./utils/ApiData.json";
+// import apiData from "./utils/ApiData.json";
 import { findNestedValue } from "./utils/smartPath";
 import DeleteArticleModal from "./utils/modal/Modal";
 
 const { getColumnsNumber } = require("./utils/CalculateColumns.tsx");
 const { applyStyleToValue } = require("./utils/applyStyleToValue.tsx");
 const { checkPathsLenght } = require("./types/tableInterface.ts");
+const {convertDateFormat}= require('./utils/convertDate/convertDateFormat.tsx')
 const {
   getObjectValueWithStringPath,
 } = require("./utils/pathHandler/getObjectWithStringPath.tsx");
-const {Pagination} = require("./utils/pagination/controller.tsx")
+const { Pagination } = require("./utils/pagination/controller.tsx");
 
 export default function Table(props: tableInterface) {
+  console.log("props", props);
   function handleStartFindPaths(data) {
     // var getFullPath = findNestedValue(data[0], data[0], ["batter"]) || "";
     // console.log("getFullPath", getFullPath);
@@ -42,9 +44,8 @@ export default function Table(props: tableInterface) {
   }
 
   useEffect(() => {
-    handleStartFindPaths(apiData);
+    handleStartFindPaths(props.data);
   }, []);
-
   if (!checkPathsLenght(props)) {
     console.warn(
       "عنوان ها با مسیر ها باید طول یکسانی داشته باشند \n لطفا به طول مقادیر دقت کنید"
@@ -52,7 +53,10 @@ export default function Table(props: tableInterface) {
     return;
   }
 
-  const [tableData, setTableData] = useState(null);
+  const [tableData, setTableData] = useState({
+    data: [],
+    currentPage: 1,
+  });
   const [deleteItemData, setDeleteItemData] = useState(null);
   // useEffect(() => {
   //   console.log('tableData in useEffect :>> ', tableData);
@@ -80,9 +84,13 @@ export default function Table(props: tableInterface) {
 
   const memoizedPagination = useMemo(
     () => (
-      <Pagination apiData={apiData} setTableData={setTableData} rowCount={props.rowCount}/>
+      <Pagination
+        apiData={props.data}
+        setTableData={setTableData}
+        rowCount={props.rowCount}
+      />
     ),
-    []
+    [props.data.length]
   );
   const memoizedDeleteArticleModal = useMemo(
     () => (
@@ -98,6 +106,25 @@ export default function Table(props: tableInterface) {
     ),
     [!!!deleteItemData == true]
   );
+
+  function getRowIndex(index: number) {
+    return index + 1 + (tableData.currentPage - 1) * props.rowCount;
+  }
+
+  function convertDateFormat() {
+    const mydate="2023-09-05T09:31:30.581Z"
+    const dateObject=new Date(mydate)
+    const formattedDate=dateObject.toLocaleString("fa-IR",{
+      year:undefined,
+      month:"long",
+      day:"2-digit",
+      hour:undefined,
+      minute:undefined
+    })
+  }
+
+  convertDateFormat()
+
 
   return (
     <>
@@ -129,14 +156,14 @@ export default function Table(props: tableInterface) {
 
         {/*row cells */}
         {!!tableData &&
-          tableData.map((item, rowIndex) => (
+          tableData.data.map((item, rowIndex) => (
             <>
               {/* Index (optional) */}
               {props.showIndex && (
                 <div
                   key={rowIndex}
                   className={`${styles.table_cell} ${styles.firstRow}`}>
-                  <p>{rowIndex + 1}</p>
+                  <p>{getRowIndex(rowIndex)}</p>
                 </div>
               )}
 

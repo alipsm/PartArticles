@@ -24,7 +24,7 @@ app.get(
                 message: "مقاله ای یافت نشد",
               });
         }
-        return res.status(201).json(readArticles);
+        return res.status(200).json(readArticles);
       } catch (error) {
         return res.status(500).json({
           message: "خطای داخلی سرور لطفا بعدا تلاش کنید",

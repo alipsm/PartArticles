@@ -10,8 +10,8 @@
         flex: 100%;
         width: 0%;
         padding: 0px 2.5vw;
-        div:first-of-type{
-            animation: showUserEntryAnimation linear 200ms 0s forwards;
+        div{
+            animation: showUserEntryAnimation linear 100ms 0s forwards;
         }
     }
 }

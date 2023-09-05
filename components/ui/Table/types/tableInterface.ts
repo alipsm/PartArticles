@@ -4,7 +4,8 @@
     paths:string[]
     showIndex?: boolean;
     showAction?: { onEdit: Function; onDelete: Function; titlePath:string};
-    setTagStyleForColumn?: number | number[];
+    setTagStyleForColumn?: number ;
+    setDateFormatForColumn?: number ;
     rowCount?: number;
     pagination?: boolean;
   }

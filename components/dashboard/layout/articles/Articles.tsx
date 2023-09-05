@@ -41,6 +41,7 @@ export default function Articles() {
       const data = await readMyArticle();
       setTableData(data);
     } catch (error) {
+      // showToast({ text: error.message, type: "Error" });
       showToast({ text: error.message, type: "Error" });
     }
   }
@@ -48,19 +49,21 @@ export default function Articles() {
   const memoizedTable = useMemo(
     () => (
       <Table
-        data={tableData}
-        titles={["Title", "Author", "Tags", "Excerpt", "Created At"]}
-        paths={["title", "username", "tags", "body", "createAt"]}
-        showAction={{
-          onDelete: onDeleteFun,
-          onEdit: onEditFun,
-          titlePath: "title",
-        }}
-        setTagStyleForColumn={3}
-        showIndex
+      data={tableData}
+      titles={["Title", "Author", "Tags", "Excerpt", "Created At"]}
+      paths={["title", "username", "tags", "body", "createAt"]}
+      showAction={{
+        onDelete: onDeleteFun,
+        onEdit: onEditFun,
+        titlePath: "title",
+      }}
+      setTagStyleForColumn={3}
+      setDateFormatForColumn={5}
+      rowCount={5}
+      showIndex
       />
     ),
-    []
+    [tableData]
   );
 
   return (
@@ -73,8 +76,8 @@ export default function Articles() {
       />
       {/* <Header title="Articles" /> */}
       <br />
-      {/* {memoizedTable} */}
-      <Table
+      {memoizedTable}
+      {/* <Table
         data={tableData}
         titles={["Title", "Author", "Tags", "Excerpt", "Created At"]}
         paths={["title", "username", "tags", "body", "createAt"]}
@@ -84,9 +87,9 @@ export default function Articles() {
           titlePath: "title",
         }}
         setTagStyleForColumn={3}
-        rowCount={5}
+        rowCount={2}
         showIndex
-      />
+      /> */}
     </div>
   );
 }

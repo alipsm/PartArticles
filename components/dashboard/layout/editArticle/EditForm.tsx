@@ -45,7 +45,7 @@ function EditForm({
       error={setInputError}
       require
     />
-  <ButtonUI text="Create Article" classes={styles.createArticleBtn} />
+  <ButtonUI text="Edit Article" classes={styles.createArticleBtn} />
   </form>
   )
 }

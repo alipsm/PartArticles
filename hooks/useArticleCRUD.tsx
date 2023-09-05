@@ -40,7 +40,7 @@ export default function useArticleCRUD() {
         .catch((e) => {
           throw new Error(e.response.data.message);
         });
-      if (status == 201) {
+      if (status == 200) {
         return data;
       }
       throw new Error("Please try again status code:" + status);
