@@ -39,7 +39,9 @@ app.delete(
 
         await Article.deleteOne({'uuid':articleID})
           .then(async() => {
-            const articles= await Article.find();
+                  // get user data with jwt
+      const userToken = decodeJWT(req.headers["token"]);
+            const articles= await Article.find({username:userToken.username});
             return res.status(200).json(articles)
           })
           .catch((e) => {

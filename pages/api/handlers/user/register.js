@@ -34,10 +34,15 @@ app.post("/api/handlers/user/register", registerSchema, async (req, res) => {
     try {
       const token = generateJWT({ username, email });
       const createUser = new User({ username, email, password, token });
-      const isExistUser = await User.findOne({ email });
-      if (isExistUser)
+      const isExistEmail = await User.findOne({ email });
+      if (isExistEmail)
         return res.status(400).json({
-          message: "این ایمیل قبلا ثبت شده",
+          message: "This Email has already been registered",
+        });
+      const isExistUsername = await User.findOne({ username });
+      if (isExistUsername)
+        return res.status(400).json({
+          message: "This Username has already been registered",
         });
       await createUser.save();
       return res.status(201).json(createUser);
