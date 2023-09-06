@@ -18,6 +18,7 @@ export default function useUserRegistration() {
           throw new Error(e.response.data.message);
         });
       if (status == 201) {
+        localStorage.setItem("UnimportantUserData",`${data.username +","+data.email}`)
         return data;
       }
       throw new Error("Please try again status code:" + status);

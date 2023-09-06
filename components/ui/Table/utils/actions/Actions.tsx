@@ -4,7 +4,7 @@ import styles from "./_style.module.scss";
 import editPicture from "./img/edit.png";
 import deletePicture from "./img/delete.png";
 
-export default function Actions({ onDelete, onEdite, item }) {
+function Actions({ onDelete, onEdite, item }) {
   return(<div id={styles.Actions}>
     <div className={styles.delete} onClick={() => onDelete(item)}>
       <Image priority={true} src={deletePicture} alt="delete" width={20} />
@@ -14,3 +14,5 @@ export default function Actions({ onDelete, onEdite, item }) {
     </div>
   </div>)
 }
+
+module.exports={Actions}

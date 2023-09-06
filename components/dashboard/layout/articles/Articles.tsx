@@ -1,7 +1,6 @@
 import Router from "next/router";
 import React, { useEffect, useMemo, useState } from "react";
 import useArticleCRUD from "../../../../hooks/useArticleCRUD";
-// import useArticleCRUD from "../../../../hooks/useArticleCRUD";
 import Table from "../../../ui/Table/Table";
 import { useToast } from "../../../ui/Toastify/ToolTipsContext";
 
@@ -9,13 +8,17 @@ import addingPicture from "./img/adding.png";
 
 const { Header } = require("../header/Header.tsx");
 
-const apiData = require("../../../ui/Table/utils/ApiData.json");
 export default function Articles() {
-  const { deleteArticle } = useArticleCRUD();
-  const [tableData, setTableData] = useState([]);
 
+  const { deleteArticle } = useArticleCRUD();
   const { readMyArticle } = useArticleCRUD();
   const { showToast } = useToast();
+  
+  const [tableData, setTableData] = useState([]);
+
+  useEffect(() => {
+    getMyArticles();
+  }, []);
 
   function onEditFun(e) {
     sessionStorage.setItem("articleID", JSON.stringify(e.uuid));
@@ -32,17 +35,13 @@ export default function Articles() {
     }
   }
 
-  useEffect(() => {
-    getMyArticles();
-  }, []);
+
 
   async function getMyArticles() {
     try {
       const data = await readMyArticle();
       setTableData(data);
     } catch (error) {
-      // showToast({ text: error.message, type: "Error" });
-      showToast({ text: error.message, type: "Error" });
     }
   }
 
@@ -61,6 +60,7 @@ export default function Articles() {
       setDateFormatForColumn={5}
       rowCount={5}
       showPagination
+      quickSearch
       showIndex
       />
     ),
@@ -75,22 +75,8 @@ export default function Articles() {
         buttonText="Add Article"
         buttonImage={addingPicture}
       />
-      {/* <Header title="Articles" /> */}
       <br />
       {memoizedTable}
-      {/* <Table
-        data={tableData}
-        titles={["Title", "Author", "Tags", "Excerpt", "Created At"]}
-        paths={["title", "username", "tags", "body", "createAt"]}
-        showAction={{
-          onDelete: onDeleteFun,
-          onEdit: onEditFun,
-          titlePath: "title",
-        }}
-        setTagStyleForColumn={3}
-        rowCount={2}
-        showIndex
-      /> */}
     </div>
   );
 }

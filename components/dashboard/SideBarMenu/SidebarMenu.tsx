@@ -5,41 +5,37 @@ import ButtonUI from "../../elements/button/ButtonUI";
 import styles from "./_style.module.scss";
 import boxPicture from "./img/box.png";
 import favoritesPicture from "./img/favorites.png";
-import menuPicture from "./img/menuIco.png";
 
 const { Header } = require("./Header/Header.tsx");
 const { Banner } = require("./baner/Banner.tsx");
 
 export default function SidebarMenu() {
-  const [userData, setUserData] = useState({username:"",email:""})
+  const [userData, setUserData] = useState({ username: "", email: "" });
+
   useEffect(() => {
-    getUserDataFromTheLocal()
-  }, [])
-  
+    getUserDataFromTheLocal();
+  }, []);
+
   function getUserDataFromTheLocal() {
-    const userLocalData=localStorage.getItem("UnimportantUserData")
+    const userLocalData = localStorage.getItem("UnimportantUserData");
     if (!!!userLocalData) {
-      localStorage.removeItem("token")
-      Router.replace("/accountOperation/login")
+      localStorage.removeItem("token");
+      Router.replace("/accountOperation/login");
     }
-    const splitedUserData=userLocalData.split(",")
+    const splitedUserData = userLocalData?.split(",");
     setUserData({
-      username:splitedUserData[0],
-      email:splitedUserData[1]
-    })
+      username: splitedUserData[0],
+      email: splitedUserData[1],
+    });
   }
 
   function logOut() {
-    localStorage.removeItem("token")
-    localStorage.removeItem("UnimportantUserData")
-    Router.replace("/accountOperation/login")
-
+    localStorage.removeItem("token");
+    localStorage.removeItem("UnimportantUserData");
+    Router.replace("/accountOperation/login");
   }
   return (
     <div id={styles.SidebarMenu}>
-      {/* <div > */}
-
-      {/* </div> */}
       <div>
         <Header />
         <br />
@@ -63,8 +59,14 @@ export default function SidebarMenu() {
       </div>
       <div>
         <main>
-          <Banner username={userData.username}email={userData.email}/>
-          <ButtonUI text="Log Out" fontSize={22} type="Tertiary" onButtonClicked={logOut} fullWidth/>
+          <Banner username={userData.username} email={userData.email} />
+          <ButtonUI
+            text="Log Out"
+            fontSize={22}
+            type="Tertiary"
+            onButtonClicked={logOut}
+            fullWidth
+          />
         </main>
       </div>
     </div>

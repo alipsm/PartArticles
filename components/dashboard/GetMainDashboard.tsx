@@ -5,12 +5,6 @@ import CreateArticles from "./layout/createArticles/CreateArticles";
 import EditArticles from "./layout/editArticle/EditArticles";
 
 export default function GetMainDashboard({ section = "" }) {
-    // const [sectionComponent, setSsectionComponent] = useState()
-//   useEffect(() => {
-//     getSection();
-//   }, []);
-
-//   function getSection() {
     switch (section.toLowerCase()) {
       case "articles":
         return <Articles />;
@@ -20,14 +14,9 @@ export default function GetMainDashboard({ section = "" }) {
         return <EditArticles />;
 
       default:
-        // debugger
-        // if (typeof window) {
-            
-        //     Router.push("/dashboard/articles");
-        // }
-        // setTimeout(() => {
-        // }, 1000);
+        setTimeout(() => {
+          Router.push("/dashboard/articles");
+        }, 2000);
         break;
     }
-//   }
 }

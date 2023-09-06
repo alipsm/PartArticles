@@ -7,6 +7,7 @@
     setTagStyleForColumn?: number ;
     setDateFormatForColumn?: number ;
     rowCount?: number;
+    quickSearch?:boolean;
     showPagination?: boolean;
   }
 

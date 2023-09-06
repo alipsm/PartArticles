@@ -1,14 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./_style.module.scss";
 import Image from "next/image";
 
 //picture
 import arrowPicture from "./img/arrow.png";
 
-// const {paginationHandler} = require("./controller.tsx")
 function View({ currentPage, handleOnClick, totalPage }) {
-  console.log('currentPage', currentPage)
-  console.log('totalPage', totalPage)
   return (
     <div id={styles.Pagination}>
       <Image
@@ -21,7 +18,7 @@ function View({ currentPage, handleOnClick, totalPage }) {
       />
       {currentPage > 1 && <button onClick={() => handleOnClick("prev")}>{currentPage - 1}</button>}
       <button >{currentPage}</button>
-      {currentPage < totalPage && <button onClick={() => handleOnClick("next")}>{currentPage + 1}</button>}
+      {currentPage < totalPage&& <button onClick={() => handleOnClick("next")}>{currentPage + 1}</button>}
       <Image
         priority={true}
         src={arrowPicture}

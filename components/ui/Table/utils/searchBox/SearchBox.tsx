@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./_styles.module.scss";
 import searchPicture from "./img/search.png";
 import closePicture from "./img/close.png";
 import { tableInterface } from "../../types/tableInterface";
-import { getObjectValueWithStringPath } from "../pathHandler/getObjectWithStringPath";
+const { getObjectValueWithStringPath } = require("../pathHandler/getObjectWithStringPath");
 
 export default function SearchBox({
   apiData = null as tableInterface,
@@ -32,7 +32,6 @@ export default function SearchBox({
       if (Array.isArray(myValue)) {
         let checkArray = myValue.findIndex((item:string) => item.includes(inputValue));
         if (checkArray>=0) {
-          debugger
           innerFilteredData.push(element);
         }
       } else if (myValue.includes(inputValue)) {
@@ -63,7 +62,7 @@ export default function SearchBox({
         width={15}
         onClick={() => clearIndexSelected(null)}
       />
-      {/* </div> */}
     </div>
   );
 }
+module.exports={SearchBox}

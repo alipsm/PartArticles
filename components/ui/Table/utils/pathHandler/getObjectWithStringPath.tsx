@@ -1,5 +1,5 @@
 const getObjectValueWithStringPath = (data, path: string) => {
-  let getKeys = path?.split(".");
+  let getKeys = path!.split(".");
   let value = data;
   if (!!!getKeys || !!!data) {
     return "{not Found}";

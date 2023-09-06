@@ -36,33 +36,30 @@ export function findNestedValue(
       
       let lastKey = Object.keys(data).pop();
       if (lastKey == key) {
-        // let a =editPath.slice(-1)[0]
-        // const isArray = a.includes("[",0);
-        // console.log("editPath.slice(-1) :>> ", editPath.slice(-1));
-        // // debugger
-        // if (isArray) {
-        //   const getInputIndex = parseInt(
-        //     editPath.slice(-1)[0].replace(/\D/g, "")
-        //     );
-        //     const objectValue = getObjectValueWithStringPath(
-        //       orgObject,
-        //       currentPath
-        //       );
-        //   let objectValueLength = objectValue.length;
-        //   if (getInputIndex < objectValueLength - 1) {
-        //     let incressIndex = getInputIndex;
-        //     editPath.pop();
-        //     // TODO: تمام , هارو داخل تکست حذف میکنه و بجاش . میزاره
-        //     currentPath = editPath.toString().replaceAll(",", ".");
-        //     currentPath += `.[${incressIndex}]`;
-        //     // getObjectOrStringFormat(key, data);
-        //     return findNestedValue(orgObject, objectValue, paths);
-        //   } else {
-        //     editPath.pop();
-        //     // TODO: تمام , هارو داخل تکست حذف میکنه و بجاش . میزاره
-        //     currentPath = editPath.toString().replaceAll(",", ".");
-        //   }
-        // }
+        let a =editPath.slice(-1)[0]
+        const isArray = a.includes("[",0);
+        // debugger
+        if (isArray) {
+          const getInputIndex = parseInt(
+            editPath.slice(-1)[0].replace(/\D/g, "")
+            );
+            const objectValue = getObjectValueWithStringPath(
+              orgObject,
+              currentPath
+              );
+          let objectValueLength = objectValue.length;
+          if (getInputIndex < objectValueLength - 1) {
+            let incressIndex = getInputIndex;
+            editPath.pop();
+            currentPath = editPath.toString().replaceAll(",", ".");
+            currentPath += `.[${incressIndex}]`;
+            // getObjectOrStringFormat(key, data);
+            return findNestedValue(orgObject, objectValue, paths);
+          } else {
+            editPath.pop();
+            currentPath = editPath.toString().replaceAll(",", ".");
+          }
+        }
         editPath.pop();
         return findNestedValue(orgObject, data[key], paths);
       }
