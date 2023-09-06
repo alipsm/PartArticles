@@ -28,6 +28,7 @@ export default function LoginForm({
           classes={styles.textInput}
           name="email"
           error={setInputError}
+          type={"email"}
           require
         />
         <InputUI
@@ -36,6 +37,7 @@ export default function LoginForm({
           classes={styles.textInput}
           name="password"
           error={setInputError}
+          type={"password"}
           require
         />
         <ButtonUI text="Login" disable={isLoading} fullWidth/>

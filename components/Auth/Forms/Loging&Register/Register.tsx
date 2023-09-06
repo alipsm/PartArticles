@@ -32,13 +32,14 @@ export default function RegisterForm({
           name={"username"}
           error={setInputError}
           require
-        />
+          />
         <InputUI
           title="Email"
           placeholder="Email"
           classes={styles.textInput}
           name={"email"}
           error={setInputError}
+          type={"email"}
           require
         />
         <InputUI
@@ -47,6 +48,7 @@ export default function RegisterForm({
           classes={styles.textInpu1t}
           name={"password"}
           error={setInputError}
+          type={"password"}
           require
         />
         <br />

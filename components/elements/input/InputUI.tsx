@@ -12,8 +12,11 @@ interface InputUiProps {
   name: string;
   inputType?:"TextBox"|"TextArea"
   value?:string
+  password?:boolean
+  type?:"password"|"email"
 }
 export default function InputUI(props: InputUiProps) {
+  console.log('props.type :>> ', props.type);
   return (
     <div
       id={inputStyles.InputUi}
@@ -33,7 +36,7 @@ export default function InputUI(props: InputUiProps) {
       ):(
       <input
        value={!!!props.value?props.value:null}
-        type={"text"}
+        type={!!props.type?props.type:"text"}
         name={props.name}
         className=""
         onChange={(e) => handleChange(props.getInputValue, e)}
