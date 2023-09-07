@@ -9,17 +9,17 @@ interface InputUiProps {
   getInputValue?: Function;
   placeholder?: string;
   classes?: string;
+  inputType?:"TextBox"|"TextArea"
   name: string;
-  value?:string
-  password?:boolean
+  value?: string;
+  password?: boolean;
 }
-// inputType?:"TextBox"|"TextArea"
-export default function InputUI(props: InputUiProps,{myinputType}) {
-  function getInputType(params:string) {
+export default function InputUI(props: InputUiProps, { myinputType }) {
+  function getInputType(params: string) {
     if (params) {
-      return params
+      return params;
     }
-    return "text"
+    return "text";
   }
   return (
     <div
@@ -27,27 +27,30 @@ export default function InputUI(props: InputUiProps,{myinputType}) {
       className={`${props.fullWidth && inputStyles.fullWidth} ${
         props.classes
       }`}>
-      <Title text={props.title} error={props.error} inputName={props.name} require={props.require} />
-      {/* {props.inputType=="TextArea"?(
+      <Title
+        text={props.title}
+        error={props.error}
+        inputName={props.name}
+        require={props.require}
+      />
+      {props.inputType == "TextArea" ? (
         <textarea
-        
-        name={props.name}
-        className=""
-        onChange={(e) => handleChange(props.getInputValue, e)}
-        placeholder={props.placeholder}
-        
+          name={props.name}
+          className=""
+          onChange={(e) => handleChange(props.getInputValue, e)}
+          placeholder={props.placeholder}
         />
-      ):(
-        )} */}
+      ) : (
         <input
-         value={!!!props.value?props.value:null}
-          type={!!props.password?"password":"text"}
+          value={!!!props.value ? props.value : null}
+          type={!!props.password ? "password" : "text"}
           // inputType={!!props.type?props.type:"text"}
           name={props.name}
           className=""
           onChange={(e) => handleChange(props.getInputValue, e)}
           placeholder={props.placeholder}
         />
+      )}
       <ErrorText error={props.error} inputName={props.name} />
     </div>
   );
@@ -56,7 +59,10 @@ export default function InputUI(props: InputUiProps,{myinputType}) {
 const Title = ({ text, error, inputName, require }) => {
   if (!text) return null;
   return (
-    <p className={`${inputStyles.title} ${isError({error,inputName}) ? inputStyles.error : ""}`}>
+    <p
+      className={`${inputStyles.title} ${
+        isError({ error, inputName }) ? inputStyles.error : ""
+      }`}>
       {text}
       <span className={inputStyles.require}>{require && "*"}</span>
     </p>
