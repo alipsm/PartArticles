@@ -2,10 +2,8 @@ import React, { useMemo } from "react";
 import styles from "./_style.module.scss";
 
 function Tags({ data }) {
-  if (data.length == 0 && !!data) return null;
-
+  if (!!!data||data.length == 0) return null;
   const mySliceData = data.slice();
-
   const momeizedTags = useMemo(
     () => (
       <div id={styles.Tags}>

@@ -1,74 +1,11 @@
 [
   {
     "_id": "64f4b42995dd6ab0622a3153",
-    "username": "ali parsa",
+    "user": {
+      "data": { "username": "ali parsa" }
+    },
+
     "title": "a",
-    "description": "a",
-    "body": "a",
-    "tags": ["a"],
-    "uuid": "a672213776c1735894a7d74df2f2caca",
-    "createAt": "2023-09-03T16:28:25.318Z",
-    "__v": 2
-  },
-  {
-    "_id": "64f4b42995dd6ab0622a3153",
-    "username": "ali parsa",
-    "title": "b",
-    "description": "a",
-    "body": "a",
-    "tags": ["a"],
-    "uuid": "a672213776c1735894a7d74df2f2caca",
-    "createAt": "2023-09-03T16:28:25.318Z",
-    "__v": 2
-  },
-  {
-    "_id": "64f4b42995dd6ab0622a3153",
-    "username": "ali parsa",
-    "title": "c",
-    "description": "a",
-    "body": "a",
-    "tags": ["a"],
-    "uuid": "a672213776c1735894a7d74df2f2caca",
-    "createAt": "2023-09-03T16:28:25.318Z",
-    "__v": 2
-  },
-  {
-    "_id": "64f4b42995dd6ab0622a3153",
-    "username": "ali parsa",
-    "title": "d",
-    "description": "a",
-    "body": "a",
-    "tags": ["a"],
-    "uuid": "a672213776c1735894a7d74df2f2caca",
-    "createAt": "2023-09-03T16:28:25.318Z",
-    "__v": 2
-  },
-  {
-    "_id": "64f4b42995dd6ab0622a3153",
-    "username": "ali parsa",
-    "title": "e",
-    "description": "a",
-    "body": "a",
-    "tags": ["a"],
-    "uuid": "a672213776c1735894a7d74df2f2caca",
-    "createAt": "2023-09-03T16:28:25.318Z",
-    "__v": 2
-  },
-  {
-    "_id": "64f4b42995dd6ab0622a3153",
-    "username": "ali parsa",
-    "title": "f",
-    "description": "a",
-    "body": "a",
-    "tags": ["a"],
-    "uuid": "a672213776c1735894a7d74df2f2caca",
-    "createAt": "2023-09-03T16:28:25.318Z",
-    "__v": 2
-  },
-  {
-    "_id": "64f4b42995dd6ab0622a3153",
-    "username": "ali parsa",
-    "title": "g",
     "description": "a",
     "body": "a",
     "tags": ["a"],

@@ -10,13 +10,17 @@ interface InputUiProps {
   placeholder?: string;
   classes?: string;
   name: string;
-  inputType?:"TextBox"|"TextArea"
   value?:string
   password?:boolean
-  type?:"password"|"email"
 }
-export default function InputUI(props: InputUiProps) {
-  console.log('props.type :>> ', props.type);
+// inputType?:"TextBox"|"TextArea"
+export default function InputUI(props: InputUiProps,{myinputType}) {
+  function getInputType(params:string) {
+    if (params) {
+      return params
+    }
+    return "text"
+  }
   return (
     <div
       id={inputStyles.InputUi}
@@ -24,7 +28,7 @@ export default function InputUI(props: InputUiProps) {
         props.classes
       }`}>
       <Title text={props.title} error={props.error} inputName={props.name} require={props.require} />
-      {props.inputType=="TextArea"?(
+      {/* {props.inputType=="TextArea"?(
         <textarea
         
         name={props.name}
@@ -34,15 +38,16 @@ export default function InputUI(props: InputUiProps) {
         
         />
       ):(
-      <input
-       value={!!!props.value?props.value:null}
-        type={!!props.type?props.type:"text"}
-        name={props.name}
-        className=""
-        onChange={(e) => handleChange(props.getInputValue, e)}
-        placeholder={props.placeholder}
-      />
-      )}
+        )} */}
+        <input
+         value={!!!props.value?props.value:null}
+          type={!!props.password?"password":"text"}
+          // inputType={!!props.type?props.type:"text"}
+          name={props.name}
+          className=""
+          onChange={(e) => handleChange(props.getInputValue, e)}
+          placeholder={props.placeholder}
+        />
       <ErrorText error={props.error} inputName={props.name} />
     </div>
   );

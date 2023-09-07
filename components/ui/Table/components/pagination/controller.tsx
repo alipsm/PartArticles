@@ -3,9 +3,8 @@ import { useState } from "react";
 
 const { View } = require("./view");
 
-function Pagination({ apiData, setTableData, rowCount = 3 ,showPagination}) {
+function Pagination({ apiData, setTableData, rowCount = 5 ,showPagination}) {
 
-  if(!showPagination) return null
   useEffect(() => {
       paginationHandler("first")
   }, [apiData])
@@ -16,7 +15,7 @@ function Pagination({ apiData, setTableData, rowCount = 3 ,showPagination}) {
     currentPage: 0,
   });
   function* paginateData(action: string) {
-    const totalItems = apiData.length;
+    const totalItems = apiData?.length;
     let innerCurrentPage = paginationData.currentPage;
     let innerStartIndex = paginationData.startIndex;
     let innerEndIndex = paginationData.endIndex;
@@ -34,7 +33,7 @@ function Pagination({ apiData, setTableData, rowCount = 3 ,showPagination}) {
         innerStartIndex = 0;
         innerEndIndex = Math.min(0 + rowCount, totalItems);
       }
-      const currentPageData = {data:apiData.slice(innerStartIndex, innerEndIndex),currentPage:innerCurrentPage};
+      const currentPageData = {data:apiData?.slice(innerStartIndex, innerEndIndex),currentPage:innerCurrentPage};
       setPaginationData({
         currentPage: innerCurrentPage,
         startIndex: innerStartIndex,
@@ -48,12 +47,14 @@ function Pagination({ apiData, setTableData, rowCount = 3 ,showPagination}) {
     const data = dataPaginator.next().value;
     setTableData(data);
   }
+
+  if(!showPagination) return null
   
   return (
     <View
       currentPage={paginationData.currentPage}
       handleOnClick={paginationHandler}
-      totalPage={Math.ceil(apiData.length/rowCount)}
+      totalPage={Math.ceil(apiData?.length/rowCount)}
     />
   );
 }

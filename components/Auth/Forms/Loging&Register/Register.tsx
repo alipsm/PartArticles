@@ -25,7 +25,7 @@ export default function RegisterForm({
     <div id={styles.RegisterForm}>
       <Header title="Sign Up" />
       <form onSubmit={handleSubmit}>
-        <InputUI
+      <InputUI
           title="Username"
           placeholder="Username"
           classes={styles.textInput}
@@ -33,13 +33,12 @@ export default function RegisterForm({
           error={setInputError}
           require
           />
-        <InputUI
+      <InputUI
           title="Email"
           placeholder="Email"
           classes={styles.textInput}
           name={"email"}
           error={setInputError}
-          type={"email"}
           require
         />
         <InputUI
@@ -48,7 +47,9 @@ export default function RegisterForm({
           classes={styles.textInpu1t}
           name={"password"}
           error={setInputError}
-          type={"password"}
+          // typed={"password"}
+          
+          password
           require
         />
         <br />

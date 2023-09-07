@@ -6,6 +6,7 @@ import Image from "next/image";
 import arrowPicture from "./img/arrow.png";
 
 function View({ currentPage, handleOnClick, totalPage }) {
+  debugger
   return (
     <div id={styles.Pagination}>
       <Image
@@ -25,7 +26,7 @@ function View({ currentPage, handleOnClick, totalPage }) {
         alt="arrow"
         height={14}
         onClick={() => handleOnClick("next")}
-        hidden={currentPage==totalPage}
+        hidden={totalPage==0||currentPage==totalPage}
       />
     </div>
   );

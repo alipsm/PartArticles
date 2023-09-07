@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 import { tableInterface } from "./types/tableInterface";
 import styles from "./_style.module.scss";
 
-import DeleteArticleModal from "./utils/modal/Modal";
+import DeleteArticleModal from "./components/modal/Modal";
 
 const {
   getColumnsNumber,
@@ -11,12 +11,17 @@ const {
 const { applyStyleToValue } = require("./utils/applyStyleToValue.tsx");
 const { checkPathsLenght } = require("./types/tableInterface.ts");
 const { getIndexRow } = require("./utils/getIndexRow");
-const { Actions } = require("./utils/actions/Actions");
-const {SearchBox} = require("./utils/searchBox/SearchBox");
+const { Actions } = require("./components/actions/Actions");
+const {SearchBox} = require("./components/searchBox/SearchBox");
 const {
   getObjectValueWithStringPath,
 } = require("./utils/pathHandler/getObjectWithStringPath.tsx");
-const { Pagination } = require("./utils/pagination/controller.tsx");
+const { Pagination } = require("./components/pagination/controller.tsx");
+
+
+Table.defaultProps={
+  rowCount:5
+}
 
 export default function Table(props: tableInterface) {
   if (!checkPathsLenght(props)) {
@@ -25,6 +30,16 @@ export default function Table(props: tableInterface) {
     );
     return;
   }
+
+  // useEffect(() => {
+  //   if (props.data.length!=0&&tableData.data.length==0) {
+  //     setTableData({...tableData,data:props.data})
+  //   }
+  // }, [props.data])
+  
+  // handle default props value
+  
+
 
   const [tableData, setTableData] = useState({
     data: [],
@@ -47,21 +62,21 @@ export default function Table(props: tableInterface) {
         showPagination={props.showPagination}
       />
     ),
-    [props.data.length, searchIndex]
+    [props.data?.length, searchIndex]
   );
   const memoizedDeleteArticleModal = useMemo(
     () => (
       <DeleteArticleModal
         articleTitle={getObjectValueWithStringPath(
           deleteItemData,
-          props.showAction.titlePath
+          props.showAction?.titlePath
         )}
         onClose={setDeleteItemData}
         showModal={!!deleteItemData}
         onDelete={handleDeleteTableItem}
       />
     ),
-    [!!!deleteItemData == true]
+    [!!deleteItemData == true]
   );
 
   return (
@@ -97,7 +112,7 @@ export default function Table(props: tableInterface) {
 
         {/*row cells */}
         {!!tableData &&
-          tableData.data.map((item, rowIndex) => (
+          tableData.data?.map((item, rowIndex) => (
             <>
               {/* Index (optional) */}
               {props.showIndex && (
@@ -115,17 +130,13 @@ export default function Table(props: tableInterface) {
               )}
 
               {/* cell data */}
-              {props.paths.map((objectKey, index) => (
+              {props.paths.map((stringOrJSX, index) => (
                 <div
                   key={index}
                   className={`${styles.table_cell} ${
                     styles[getClassStyleForTableRow(index, props)]
                   }`}>
-                  {Array.isArray(objectKey) ? (
-                    objectKey
-                  ) : (
-                    <p>{applyStyleToValue(item[objectKey], index, props)}</p>
-                  )}
+                    <p>{applyStyleToValue(item,stringOrJSX, index, props)}</p>  
                 </div>
               ))}
 

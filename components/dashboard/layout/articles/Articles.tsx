@@ -3,17 +3,17 @@ import React, { useEffect, useMemo, useState } from "react";
 import useArticleCRUD from "../../../../hooks/useArticleCRUD";
 import Table from "../../../ui/Table/Table";
 import { useToast } from "../../../ui/Toastify/ToolTipsContext";
+import MyHocUserStyles from "../utils/userStyles/UserStyleComponet";
 
 import addingPicture from "./img/adding.png";
 
 const { Header } = require("../header/Header.tsx");
 
 export default function Articles() {
-
   const { deleteArticle } = useArticleCRUD();
   const { readMyArticle } = useArticleCRUD();
   const { showToast } = useToast();
-  
+
   const [tableData, setTableData] = useState([]);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function Articles() {
 
   function onEditFun(e) {
     sessionStorage.setItem("articleID", JSON.stringify(e.uuid));
-    window !=undefined&& Router.push("edit");
+    window != undefined && Router.push("edit");
   }
 
   async function onDeleteFun(e) {
@@ -35,33 +35,39 @@ export default function Articles() {
     }
   }
 
-
-
   async function getMyArticles() {
     try {
       const data = await readMyArticle();
       setTableData(data);
-    } catch (error) {
-    }
+    } catch (error) {}
   }
 
   const memoizedTable = useMemo(
     () => (
       <Table
-      data={tableData}
-      titles={["Title", "Author", "Tags", "Excerpt", "Created At"]}
-      paths={["title", "username", "tags", "body", "createAt"]}
-      showAction={{
-        onDelete: onDeleteFun,
-        onEdit: onEditFun,
-        titlePath: "title",
-      }}
-      setTagStyleForColumn={3}
-      setDateFormatForColumn={5}
-      rowCount={5}
-      showPagination
-      quickSearch
-      showIndex
+        data={tableData}
+        titles={["Title", "Author", "Tags", "Excerpt", "Created At"]}
+        paths={[
+          "title",
+          <MyHocUserStyles>
+            <span data-path="username"></span>
+          </MyHocUserStyles>
+          ,
+          "tags",
+          "body",
+          "createAt",
+        ]}
+        showAction={{
+          onDelete: onDeleteFun,
+          onEdit: onEditFun,
+          titlePath: "title",
+        }}
+        setTagStyleForColumn={3}
+        setDateFormatForColumn={5}
+        showPagination
+        rowCount={3}
+        quickSearch
+        showIndex
       />
     ),
     [tableData]

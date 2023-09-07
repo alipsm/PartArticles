@@ -1,15 +1,18 @@
+ type PathItems=string|JSX.Element
  interface tableInterface {
     titles: string[];
     data: object[];
-    paths:string[]
+    paths:PathItems[]
     showIndex?: boolean;
     showAction?: { onEdit: Function; onDelete: Function; titlePath:string};
     setTagStyleForColumn?: number ;
     setDateFormatForColumn?: number ;
-    rowCount?: number;
+    rowCount: number;
     quickSearch?:boolean;
     showPagination?: boolean;
   }
+
+  
 
   function checkPathsLenght(tableData) {
     

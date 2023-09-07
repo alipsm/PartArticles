@@ -4,7 +4,7 @@ import styles from "./_styles.module.scss";
 import searchPicture from "./img/search.png";
 import closePicture from "./img/close.png";
 import { tableInterface } from "../../types/tableInterface";
-const { getObjectValueWithStringPath } = require("../pathHandler/getObjectWithStringPath");
+const { getObjectValueWithStringPath } = require("../../utils/pathHandler/getObjectWithStringPath");
 
 export default function SearchBox({
   apiData = null as tableInterface,
