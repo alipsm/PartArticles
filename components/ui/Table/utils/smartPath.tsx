@@ -9,7 +9,6 @@ export function findNestedValue(
   paths: string[]
 ) {
   for (const key in data) {
-    // debugger
     if (findPath) {
       return pathFind;
     }
@@ -31,14 +30,12 @@ export function findNestedValue(
       }
       return findNestedValue(orgObject, data[key], paths);
     } else {
-      // debugger
       let editPath = currentPath.split(".");
       
       let lastKey = Object.keys(data).pop();
       if (lastKey == key) {
         let a =editPath.slice(-1)[0]
         const isArray = a.includes("[",0);
-        // debugger
         if (isArray) {
           const getInputIndex = parseInt(
             editPath.slice(-1)[0].replace(/\D/g, "")

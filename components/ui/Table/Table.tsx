@@ -96,7 +96,7 @@ export default function Table(props: tableInterface) {
         )}
         {props.titles.map((item, index) => (
           <div
-            key={item}
+            key={"title"+item}
             className={`${styles.table_header} ${
               styles[getClassStyleForTableRow(index, props)]
             }`}
@@ -117,7 +117,7 @@ export default function Table(props: tableInterface) {
               {/* Index (optional) */}
               {props.showIndex && (
                 <div
-                  key={rowIndex}
+                  key={"index"+rowIndex}
                   className={`${styles.table_cell} ${styles.firstRow}`}>
                   <p>
                     {getIndexRow(
@@ -132,7 +132,7 @@ export default function Table(props: tableInterface) {
               {/* cell data */}
               {props.paths.map((stringOrJSX, index) => (
                 <div
-                  key={index}
+                  key={"cellItem"+index}
                   className={`${styles.table_cell} ${
                     styles[getClassStyleForTableRow(index, props)]
                   }`}>

@@ -6,7 +6,6 @@ import Image from "next/image";
 import arrowPicture from "./img/arrow.png";
 
 function View({ currentPage, handleOnClick, totalPage }) {
-  debugger
   return (
     <div id={styles.Pagination}>
       <Image

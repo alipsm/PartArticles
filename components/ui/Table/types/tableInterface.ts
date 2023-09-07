@@ -15,7 +15,6 @@
   
 
   function checkPathsLenght(tableData) {
-    
     return tableData.titles?.length === tableData.paths?.length
   }
 

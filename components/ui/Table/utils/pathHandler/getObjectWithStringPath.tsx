@@ -1,6 +1,7 @@
 const getObjectValueWithStringPath = (data, path: string) => {
-  if(!!!path) return ""
-  let getKeys = path.split(".");
+  if(!!!path||typeof path!="string") return ""
+  // debugger
+  let getKeys = path?.split(".");
   let value = data;
   if (!!!getKeys || !!!data) {
     return "{not Found}";
