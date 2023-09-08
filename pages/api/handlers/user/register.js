@@ -22,14 +22,6 @@ app.post("/api/handlers/user/register", registerSchema, async (req, res) => {
     const recaptchaToken = req.headers["authorization"];
     const userIpIddress = req.socket.remoteAddress;
 
-    const isRecaptchaValid = await recaptchaValidator.validateRecaptchaToken(
-      recaptchaToken,
-      userIpIddress
-    );
-
-    if (isRecaptchaValid == false)
-      throw new AppError("Invalid reCaptcha token", 400);
-
     const { username, email, password } = req.body;
     try {
       const token = generateJWT({ username, email });
@@ -44,6 +36,13 @@ app.post("/api/handlers/user/register", registerSchema, async (req, res) => {
         return res.status(400).json({
           message: "This Username has already been registered",
         });
+      const isRecaptchaValid = await recaptchaValidator.validateRecaptchaToken(
+        recaptchaToken,
+        userIpIddress
+      );
+
+      if (isRecaptchaValid == false)
+        throw new AppError("Invalid reCaptcha token", 400);
       await createUser.save();
       return res.status(201).json(createUser);
     } catch (error) {
