@@ -6,6 +6,7 @@ import styles from './_style.module.scss'
 function CreateForm({
     onSubmitForm,
     setInputError = { name: "", text: "" },
+    isLoading=false
 }) {
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -45,7 +46,7 @@ function CreateForm({
       error={setInputError}
       require
     />
-  <ButtonUI text="Create Article" classes={styles.createArticleBtn} />
+  <ButtonUI text="Create Article" classes={styles.createArticleBtn} disable={isLoading}/>
   </form>
   )
 }

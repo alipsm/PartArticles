@@ -17,11 +17,13 @@ export default function EditArticles() {
   
   const [myTags, setMyTags] = useState([]);
   const [inputError, setInputError] = useState({ name: "", text: "" });
+  const [loading, setLoading] = useState(false);
 
   const handleSubmitEditArticle = async (e: object) => {
     const { status, message, field } = getValidation(e);
     if (status) {
       try {
+        setLoading(true)
         const getArticleId = sessionStorage.getItem("articleID");
         const articleData = { ...e, tags: myTags };
         await editArticle(articleData,getArticleId);
@@ -29,6 +31,8 @@ export default function EditArticles() {
         Router.replace("articles");
       } catch (error) {
         showToast({ text: error.message, type: "Error" });
+      } finally{
+        setLoading(false)
       }
     } else {
       setInputError({ name: field, text: message });
@@ -43,6 +47,7 @@ export default function EditArticles() {
         <EditForm
           onSubmitForm={handleSubmitEditArticle}
           setInputError={inputError}
+          isLoading={loading}
         />
         <section>
           <CreateTagBox onChange={setMyTags} />
