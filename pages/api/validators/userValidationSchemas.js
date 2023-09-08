@@ -4,13 +4,13 @@ const registerSchema = [
   body("username")
     .notEmpty()
     .withMessage("ٔنام خالی است!")
-    .isLength({ min: 6, max: 40 })
-    .withMessage("نام میبایست بیشتر از ۶ حرف باشد"),
+    .isLength({ min: 5, max: 40 })
+    .withMessage("نام میبایست بیشتر از 5 حرف باشد"),
   body("password")
     .notEmpty()
     .withMessage("فیلد پسورد خالی است")
     .isLength({ min: 6, max: 500 })
-    .withMessage("پسورد باید حداقل شامل ۶ حرف باشد"),
+    .withMessage("پسورد باید حداقل شامل 6 حرف باشد"),
   body("email")
     .notEmpty()
     .withMessage("فیلد ایمیل خالی است")

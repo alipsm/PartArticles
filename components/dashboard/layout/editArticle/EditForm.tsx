@@ -39,7 +39,7 @@ function EditForm({
     <br />
     <br />
     <InputUI
-      title="Body"
+      title="Body" 
       name="body"
       placeholder="Article Description"
       inputType="TextArea"
